@@ -1,14 +1,11 @@
 import React from 'react'
 import './App.css'
-import CommonBtn from './scripts/Cores/Components/Atoms/CommonBtn'
+import LoginPage from './scripts/Tops/Components/Pages/LoginPage'
 
 function App() {
   return (
     <div>
-      <div className="App">こんにちは</div>
-      <div>
-        <CommonBtn size="large">ログイン</CommonBtn>
-      </div>
+      <LoginPage />
     </div>
   )
 }

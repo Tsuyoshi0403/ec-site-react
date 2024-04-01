@@ -36,6 +36,7 @@ type ICommonBtnProps = React.DetailedHTMLProps<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
 > & {
+  /** サイズ */
   size?: 'small' | 'mediom' | 'large' | 'mega'
 }
 
