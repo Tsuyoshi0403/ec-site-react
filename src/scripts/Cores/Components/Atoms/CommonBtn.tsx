@@ -7,7 +7,7 @@ const smallStyle = css({
   fontSize: '16px',
 })
 
-const mediomStyle = css({
+const mediumStyle = css({
   color: 'red',
   fontSize: '32px',
 })
@@ -37,7 +37,7 @@ type ICommonBtnProps = React.DetailedHTMLProps<
   HTMLButtonElement
 > & {
   /** サイズ */
-  size?: 'small' | 'mediom' | 'large' | 'mega'
+  size?: 'small' | 'medium' | 'large' | 'mega'
 }
 
 /**
@@ -45,8 +45,8 @@ type ICommonBtnProps = React.DetailedHTMLProps<
  */
 const CommonBtn = (props: ICommonBtnProps): JSX.Element => {
   let sizeStyle = smallStyle
-  if (props.size === 'mediom') {
-    sizeStyle = mediomStyle
+  if (props.size === 'medium') {
+    sizeStyle = mediumStyle
   } else if (props.size === 'large') {
     sizeStyle = largeStyle
   } else if (props.size === 'mega') {

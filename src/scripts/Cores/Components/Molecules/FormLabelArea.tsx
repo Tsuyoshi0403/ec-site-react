@@ -55,7 +55,7 @@ type IProps = {
   /** エラーメッセージ */
   error?: string
   /** クラス名 */
-  classNmae?: string
+  className?: string
   /** 子要素 */
   children: React.ReactNode
   /** 説明 */
