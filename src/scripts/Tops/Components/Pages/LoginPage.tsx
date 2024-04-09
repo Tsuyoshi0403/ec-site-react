@@ -1,4 +1,3 @@
-import React from 'react'
 import LoginFormParts from '../Molecules/LoginFormParts'
 import { css } from '@emotion/css'
 
@@ -17,8 +16,10 @@ const rootStyle = css`
     justify-content: center;
   }
 `
-
-const LoginPage = () => {
+/**
+ * ログイン画面
+ */
+const LoginPage = (): JSX.Element => {
   return (
     <div className={rootStyle}>
       <article className="login-card">

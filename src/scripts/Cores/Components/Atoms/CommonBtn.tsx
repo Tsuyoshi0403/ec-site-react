@@ -1,6 +1,4 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react'
-import * as React from 'react'
+import { css } from '@emotion/css'
 
 const smallStyle = css({
   color: 'red',
@@ -55,7 +53,7 @@ const CommonBtn = (props: ICommonBtnProps): JSX.Element => {
 
   return (
     <div>
-      <button {...props} css={sizeStyle}>
+      <button {...props} className={sizeStyle}>
         {props.children}
       </button>
     </div>
