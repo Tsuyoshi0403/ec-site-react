@@ -15,7 +15,10 @@ const FormWrapStyle = css`
   }
 `
 
-const LoginFormParts = () => {
+/**
+ * ログイン画面のIDとPASS入力用のフォーマットセット
+ */
+const LoginFormParts = (): JSX.Element => {
   return (
     <article className={FormWrapStyle}>
       <FormLabelArea label="メールアドレス">

@@ -1,11 +1,11 @@
 import React from 'react'
 import './App.css'
-import LoginPage from './scripts/Tops/Components/Pages/LoginPage'
+import TopPage from './scripts/Tops/Components/Pages/TopPage'
 
 function App() {
   return (
     <div>
-      <LoginPage />
+      <TopPage />
     </div>
   )
 }

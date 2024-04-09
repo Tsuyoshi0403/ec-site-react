@@ -20,6 +20,7 @@
     ],
     "rules": {
         "react/no-unknown-property": ["error", { "ignore": ["css"] }],
-        "react/prop-types": "off"
+        "react/prop-types": "off",
+        "react/react-in-jsx-scope": "off"
     }
 }
