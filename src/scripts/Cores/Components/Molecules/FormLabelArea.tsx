@@ -3,6 +3,14 @@ import * as React from 'react'
 
 const rootStyle = css`
   padding: 8px;
+  .txt-color-alert {
+    color: #ff6969;
+  }
+  .txt-size-small {
+    font-size: 12px;
+    padding: 0px;
+    margin: 0px;
+  }
   .description {
     font-size: 0.8em;
     padding-bottom: 3px;
