@@ -16,17 +16,29 @@ const rootStyle = css`
 type ICommonInputProps = React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
->
+> & {
+  /** 変更時コールバック */
+  onChangeValue?: (value: string | number) => void
+}
 
 /**
  * 共通1行インプットエリア
  */
 const CommonInput = (props: ICommonInputProps): JSX.Element => {
-  const { type, ...otherProps } = props
+  const { type, onChangeValue, ...otherProps } = props
   const isPassword = type === 'password'
+
+  const onChange = (e: React.FocusEvent<HTMLInputElement>) => {
+    onChangeValue && onChangeValue(e.target.value)
+  }
+
   return (
     <p className={rootStyle}>
-      <input {...otherProps} type={isPassword ? 'password' : type} />
+      <input
+        {...otherProps}
+        type={isPassword ? 'password' : type}
+        onChange={onChange}
+      />
     </p>
   )
 }

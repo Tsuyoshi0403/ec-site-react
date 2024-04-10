@@ -10,6 +10,7 @@ const rootStyle = css`
     border: 1px solid #000;
     border-radius: 10px;
     padding: 30px 10px;
+    height: 320px;
   }
   .login-text {
     display: flex;
