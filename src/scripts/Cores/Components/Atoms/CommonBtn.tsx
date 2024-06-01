@@ -1,4 +1,5 @@
 import { css } from '@emotion/css'
+import classNames from 'classnames'
 
 const smallStyle = css({
   color: 'red',
@@ -53,7 +54,7 @@ const CommonBtn = (props: ICommonBtnProps): JSX.Element => {
 
   return (
     <div>
-      <button {...props} className={sizeStyle}>
+      <button {...props} className={classNames(props.className, sizeStyle)}>
         {props.children}
       </button>
     </div>

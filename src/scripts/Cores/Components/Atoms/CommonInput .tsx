@@ -7,7 +7,6 @@ const rootStyle = css`
     width: 250px;
     height: 20px;
     border: #585858 solid 2px;
-    border-radius: 8px;
     padding: 5px 25px 5px 5px;
     transition: 0.3s;
   }

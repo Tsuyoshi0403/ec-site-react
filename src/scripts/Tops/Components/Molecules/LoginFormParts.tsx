@@ -7,6 +7,9 @@ import { useNavigate } from 'react-router-dom'
 
 const FormWrapStyle = css`
   margin-bottom: 15px;
+  .input-style {
+    border-radius: 8px;
+  }
   .login-btn {
     display: flex;
     justify-content: center;
@@ -75,6 +78,7 @@ const LoginFormParts = (): JSX.Element => {
           type="text"
           placeholder="メールアドレスを入力"
           onChangeValue={onChange('loginId')}
+          className="input-style"
         />
       </FormLabelArea>
       <FormLabelArea
@@ -85,6 +89,7 @@ const LoginFormParts = (): JSX.Element => {
           type="password"
           placeholder="パスワードを入力"
           onChangeValue={onChange('password')}
+          className="input-style"
         />
       </FormLabelArea>
       <div className="login-btn">
