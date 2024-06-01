@@ -1,6 +1,7 @@
 import { css } from '@emotion/css'
 import { ChangeEvent, useState } from 'react'
 import StringUtil from '../../../Cores/Utils/StringUtil'
+import classNames from 'classnames'
 
 const rootStyle = css`
   display: flex;
@@ -29,12 +30,9 @@ const rootStyle = css`
           transform: translateY(-120%);
           color: #62cda2;
           font-size: 12px;
-        }
-        .login-label-error {
-          position: absolute;
-          transform: translateY(-120%);
-          color: #eb5a46;
-          font-size: 12px;
+          &.label-error {
+            color: #eb5a46;
+          }
         }
         .login-input-text {
           border: 0px;
@@ -56,9 +54,7 @@ const rootStyle = css`
             outline: none;
             border-bottom-color: #62cda2;
           }
-
-          /* ログインIDエラー時のスタイル */
-          &.error {
+          &.input-error {
             border-bottom-color: #eb5a46;
           }
         }
@@ -123,9 +119,7 @@ const NewLoginPage = (): JSX.Element => {
   /**
    * フォーム送信時の処理
    */
-  const onSubmit = () => {
-    console.log('実行')
-  }
+  const onSubmit = () => {}
 
   /**
    * データ変更時の処理
@@ -156,17 +150,17 @@ const NewLoginPage = (): JSX.Element => {
           <div className="login-input">
             {(formState.loginIdError || emailFocus) && (
               <label
-                className={
-                  formState.loginIdError ? 'login-label-error' : 'login-label'
-                }
+                className={classNames('login-label', {
+                  'label-error': formState.loginIdError,
+                })}
               >
                 メールアドレス
               </label>
             )}
             <input
-              className={`login-input-text ${
-                formState.loginIdError ? 'error' : ''
-              }`}
+              className={classNames('login-input-text', {
+                'input-error': formState.loginIdError,
+              })}
               placeholder="メールアドレス"
               type="text"
               value={formState.loginId}
@@ -181,17 +175,17 @@ const NewLoginPage = (): JSX.Element => {
           <div className="login-input">
             {(formState.passwordError || passwordFocus) && (
               <label
-                className={
-                  formState.passwordError ? 'login-label-error' : 'login-label'
-                }
+                className={classNames('login-label', {
+                  'label-error': formState.passwordError,
+                })}
               >
                 パスワード
               </label>
             )}
             <input
-              className={`login-input-text ${
-                formState.passwordError ? 'error' : ''
-              }`}
+              className={classNames('login-input-text', {
+                'input-error': formState.passwordError,
+              })}
               placeholder="パスワード"
               type="password"
               value={formState.password}
