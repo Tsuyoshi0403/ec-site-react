@@ -1,11 +1,12 @@
 import { Route, Routes } from 'react-router-dom'
-import Header from '../../../SiteList/Components/Organisms/Header'
 import NewLoginPage from './ NewLoginPage'
+import MainPage from '../../../Main/Components/Page/MainPage'
 
 const TopPage = (): JSX.Element => {
   return (
     <Routes>
       <Route path="/login" element={<NewLoginPage />} />
+      <Route path="/" element={<MainPage />} />
     </Routes>
   )
 }
