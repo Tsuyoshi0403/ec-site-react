@@ -105,6 +105,7 @@ type IFormState = {
 
 /**
  * ログイン画面
+ * @returns {JSX.Element}
  */
 const NewLoginPage = (): JSX.Element => {
   const [emailFocus, setEmailFocus] = useState<boolean>(false)
