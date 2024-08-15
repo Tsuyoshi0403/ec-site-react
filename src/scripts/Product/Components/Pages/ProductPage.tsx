@@ -2,6 +2,7 @@ import CoffeeMachine from '../../../assets/images/CoffeeMachine.jpg'
 import { css } from '@emotion/css'
 import StarRating from '../Molecules/StarRating'
 import { ChangeEvent, useState } from 'react'
+import ProductDetail from '../Molecules/ProductDetail'
 
 const rootStyle = css`
   display: flex;
@@ -10,7 +11,7 @@ const rootStyle = css`
     margin-top: 100px;
     .product-wrapper {
       display: flex;
-      .image-area {
+      .image-section {
         height: 400px;
         width: 500px;
         .image {
@@ -32,7 +33,7 @@ const rootStyle = css`
         .product-price {
           font-size: 35px;
         }
-        .dropdown {
+        .quantity-dropdown {
           padding: 8px;
           border: 1px solid #d9d9d9;
           border-radius: 10px;
@@ -40,51 +41,25 @@ const rootStyle = css`
           background-color: #d9d9d9;
           cursor: pointer;
         }
-        .cart-btn-area {
-          margin-top: 25px;
-          margin-bottom: 15px;
-          .cart-btn {
+        .button-area {
+          margin: 25px 0 15px;
+          .button {
             width: 700px;
             height: 50px;
             border: 0;
             border-radius: 20px;
-            background-color: #fed214;
             font-size: 20px;
             font-weight: 700;
             color: #fff;
             cursor: pointer;
+            &.cart {
+              background-color: #fed214;
+            }
+            &.buy-now {
+              background-color: #62cda2;
+              margin-top: 15px;
+            }
           }
-        }
-
-        .buy-now-btn {
-          width: 700px;
-          height: 50px;
-          border: 0;
-          border-radius: 20px;
-          background-color: #62cda2;
-          font-size: 20px;
-          font-weight: 700;
-          color: #fff;
-          cursor: pointer;
-        }
-      }
-    }
-    .wrapper-details {
-      width: 1200px;
-      margin-top: 60px;
-      .title-details {
-        border-bottom: 1px solid #000000;
-        padding-bottom: 10px;
-      }
-      .product-details {
-        padding-bottom: 7px;
-        .label-category {
-          display: inline-block;
-          width: 150px;
-        }
-        .label-result {
-          position: relative;
-          left: 20px;
         }
       }
     }
@@ -107,10 +82,8 @@ const ProductPage = (): JSX.Element => {
     <div className={rootStyle}>
       <div className="product-container">
         <div className="product-wrapper">
-          <div className="image-area">
-            <a>
-              <img className="image" src={CoffeeMachine} />
-            </a>
+          <div className="image-section">
+            <img className="image" src={CoffeeMachine} alt="商品画像" />
           </div>
           <div className="product-info">
             <h1 className="product-title">
@@ -124,7 +97,7 @@ const ProductPage = (): JSX.Element => {
             <div>
               <label>数量: </label>
               <select
-                className="dropdown"
+                className="quantity-dropdown"
                 id="quantity-dropdown"
                 value={selectedQuantity}
                 onChange={handleSelectChange}
@@ -136,34 +109,14 @@ const ProductPage = (): JSX.Element => {
                 ))}
               </select>
             </div>
-            <div className="cart-btn-area">
-              <button className="cart-btn">買い物がごにいれる</button>
-            </div>
-            <div className="buy-now-area">
-              <button className="buy-now-btn">今すぐ買う</button>
+            <div className="button-area">
+              <button className="button cart">買い物がごにいれる</button>
+              <button className="button buy-now">今すぐ買う</button>
             </div>
           </div>
         </div>
         {/** 商品情報 */}
-        <div className="wrapper-details">
-          <h1 className="title-details">商品情報</h1>
-          <div className="product-details">
-            <span className="label-category">販売元</span>:
-            <span className="label-result">ネスレ日本株式会社</span>
-          </div>
-          <div className="product-details">
-            <span className="label-category">対応機種等</span>:
-            <span className="label-result">Nestle(ネスレ)</span>
-          </div>
-          <div className="product-details">
-            <span className="label-category">販売元</span>:
-            <span className="label-result">HAD-S-KABAH</span>
-          </div>
-          <div className="product-details">
-            <span className="label-category">JAN</span>:
-            <span className="label-result">4902370550733</span>
-          </div>
-        </div>
+        <ProductDetail />
       </div>
     </div>
   )
