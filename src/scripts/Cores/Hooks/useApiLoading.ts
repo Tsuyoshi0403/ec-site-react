@@ -6,15 +6,15 @@ import ApiRefresh from '../Api/ApiRefresh'
 import ApiError, { ApiErrorKind } from '../Api/ApiError'
 import useAsyncError from './useAsyncError'
 
-/** 成功時のコールバック */
-export type SuccessCallback<Response> = (response: Response) => void
-/** エラー時のコールバック */
-export type ErrorCallback = (e: any) => boolean | void
-
 /** API関数の型定義 */
 export declare type ApiFunction<Request, Response extends ICommonResponse> = (
   request?: Request
 ) => Promise<Response>
+
+/** 成功時のコールバック */
+export type SuccessCallback<Response> = (response: Response) => void
+/** エラー時のコールバック */
+export type ErrorCallback = (e: any) => boolean | void
 
 /** 実行API関数の型定義 */
 export declare type ExecApiFunction<
@@ -33,7 +33,7 @@ let execApiCount = 0
  * @param apiFunc
  * @param showLoading
  */
-const useApiLoading = <Request, Response extends ICommonResponse>(
+export const useApiLoading = <Request, Response extends ICommonResponse>(
   apiFunc: ApiFunction<Request, Response>,
   showLoading = true
 ): { execApi: ExecApiFunction<Request, Response> } => {
@@ -52,9 +52,9 @@ const useApiLoading = <Request, Response extends ICommonResponse>(
     }
     try {
       // トークンが存在しているかつ期限が切れていたらリフレッシュを実行
-      if (JWTUtil.existsToken() && JWTUtil.checkTokenExpired()) {
-        await ApiRefresh.post()
-      }
+      // if (JWTUtil.existsToken() && JWTUtil.checkTokenExpired()) {
+      // await ApiRefresh.post()
+      // }
 
       const response = await apiFunc(request)
       successCallback && successCallback(response)

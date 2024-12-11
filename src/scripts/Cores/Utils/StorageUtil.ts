@@ -1,3 +1,5 @@
+import CryptoJS from 'crypto-js'
+
 /** LocalStorageに保存するキー */
 export const StorageKey = {
   API_TOKEN: 'jtkn',

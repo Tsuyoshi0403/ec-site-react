@@ -21,7 +21,8 @@ const DEFAULT_OPTIONS: Options = {
           switch (response.status) {
             // 401はトークン切れもしくはトークン不正なので、ローカルストレージのトークンを削除しインデックスへ飛ばす
             case 401:
-            //権限が無いエラーなので、更新するために、トークンを削除しログイン画面へ遷移
+            // 権限が無いエラーは更新するために、トークンを削除しログイン画面へ返却
+            // eslint-disable-next-line no-fallthrough
             case 403:
               StorageUtil.remove(StorageKey.API_TOKEN)
               StorageUtil.remove(StorageKey.API_REFRESH_TOKEN)
@@ -77,7 +78,7 @@ export default {
   request: async function <TResponse extends ICommonResponse>(
     method: string,
     url: string,
-    data?: Request,
+    data?: any,
     addOption?: Options,
     addHeaders?: HeadersInit | { [key: string]: undefined }
   ): Promise<TResponse> {
@@ -93,8 +94,9 @@ export default {
       method: method,
     }
 
-    if (method !== 'get') option.json = data
-    else {
+    if (method !== 'get') {
+      option.json = data
+    } else {
       const params: any = { ...data }
       option.searchParams = { ...params }
     }
