@@ -102,6 +102,7 @@ export default {
     }
 
     const response = await ky(url, option)
+    // TODO:必要かどうか後ほど検討する（ネットワークのレスポンス情報で十分かも）
     if (!response.ok) {
       throw new ApiError(
         response.statusText,

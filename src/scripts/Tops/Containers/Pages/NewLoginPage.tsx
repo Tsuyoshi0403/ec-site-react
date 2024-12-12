@@ -4,6 +4,7 @@ import useApiLoading from '../../../Cores/Hooks/useApiLoading'
 import NewLoginPage from '../../Components/Pages/NewLoginPage'
 import StringUtil from '../../../Cores/Utils/StringUtil'
 import { useNavigate } from 'react-router-dom'
+import StorageUtil, { StorageKey } from '../../../Cores/Utils/StorageUtil'
 
 export type IFormState = {
   /** ログインID */
@@ -20,14 +21,21 @@ export type IFormState = {
  * ログイン画面コンテナ
  */
 const NewLoginPageContainers = () => {
+  const { execApi: execApiPost } = useApiLoading(ApiLogin.post)
+  const navigate = useNavigate()
   const [formState, setFormState] = useState<IFormState>({
     loginId: '',
     password: '',
     loginIdError: false,
     passwordError: false,
   })
-  const navigate = useNavigate()
-  const { execApi: execApiPost } = useApiLoading(ApiLogin.post)
+
+  useEffect(() => {
+    // トークンがある場合、メインページに遷移させる
+    if (StorageUtil.get(StorageKey.API_TOKEN) !== null) {
+      navigate('/')
+    }
+  }, [])
 
   /**
    * ログインフォーム送信時の処理
@@ -44,16 +52,16 @@ const NewLoginPageContainers = () => {
       return
     }
 
-    execApiPost(
-      {
+    execApiPost({
+      request: {
         type: 'pass',
         id: formState.loginId,
         pass: formState.password,
       },
-      () => {
+      successCallback: () => {
         navigate('/')
-      }
-    )
+      },
+    })
   }
 
   /**

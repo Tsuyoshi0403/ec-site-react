@@ -20,12 +20,12 @@ export type ErrorCallback = (e: any) => boolean | void
 export declare type ExecApiFunction<
   Request,
   Response extends ICommonResponse,
-> = (
-  request?: Request,
-  successCallback?: SuccessCallback<Response>,
-  errorCallback?: ErrorCallback,
+> = (params: {
+  request?: Request
+  successCallback?: SuccessCallback<Response>
+  errorCallback?: ErrorCallback
   finallyCallback?: () => void
-) => Promise<boolean>
+}) => Promise<boolean>
 
 let execApiCount = 0
 /**
@@ -40,34 +40,33 @@ export const useApiLoading = <Request, Response extends ICommonResponse>(
   const setLoading = useSetRecoilState(LoadingState)
   const throwError = useAsyncError()
 
-  const execApi: ExecApiFunction<Request, Response> = async (
+  const execApi: ExecApiFunction<Request, Response> = async ({
     request,
     successCallback,
     errorCallback,
-    finallyCallback
-  ) => {
+    finallyCallback,
+  }) => {
     if (showLoading) {
       setLoading(true)
       execApiCount++
     }
     try {
-      // トークンが存在しているかつ期限が切れていたらリフレッシュを実行
-      // if (JWTUtil.existsToken() && JWTUtil.checkTokenExpired()) {
-      // await ApiRefresh.post()
-      // }
+      if (JWTUtil.existsToken() && JWTUtil.checkTokenExpired()) {
+        // TODO: 安田 refreshAPI実装が完了後、API繋ぎ込みをする
+        // await ApiRefresh.post()
+      }
 
       const response = await apiFunc(request)
       successCallback && successCallback(response)
 
       return true
     } catch (e) {
-      // エラーコールバックが設定されていた場合、以降の処理は行わない
       if (errorCallback) {
         const shouldContinue = errorCallback(e)
-        // リターンがtrue以外の場合、ここで止める
         if (!shouldContinue) return false
       }
 
+      // TODO:安田 バックエンドのエラーレスポンスを実装したらチェックする
       if (e instanceof ApiError) {
         let message = ''
         switch (e.errorKind) {
