@@ -1,5 +1,5 @@
 import { css } from '@emotion/css'
-import NewHeader from '../../../Tops/Components/Organisms/NewHeader '
+import NewHeader from '../../../Tops/Components/Organisms/NewHeader'
 import SlideShow from '../Organisms/SlideShow'
 import SaleItems from '../Organisms/SaleItems'
 import RecommendedItems from '../Organisms/RecommendedItems'

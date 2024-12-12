@@ -1,4 +1,5 @@
 import StorageUtil, { StorageKey } from './StorageUtil'
+import { Buffer } from 'buffer'
 
 export type JWTClaim = {
   /** 期限切れ日時 */

@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom'
-import NewLoginPage from './NewLoginPage'
-import MainPage from '../../../Main/Components/Page/MainPage'
-import Loading from '../../../Cores/Components/Organisms/Loading'
 import { useRecoilValue } from 'recoil'
 import LoadingState from '../../../Cores/Recoil/LoadingState'
+import Loading from '../../../Cores/Components/Organisms/Loading'
+import NewLoginPageContainers from '../../Containers/Pages/NewLoginPage'
+import AuthRoute from './AuthRoute'
 
 /**
  * Topコンポーネント
@@ -14,8 +14,9 @@ const TopPage = (): JSX.Element => {
   return (
     <>
       <Routes>
-        <Route path="/login" element={<NewLoginPage />} />
-        <Route path="/" element={<MainPage />} />
+        {/** 未ログイン時はログインページにリダイレクト、ログイン済みはメインページを表示 */}
+        <Route path="/*" element={<AuthRoute path="/*" />} />
+        <Route path="/login" element={<NewLoginPageContainers />} />
       </Routes>
       <Loading open={isLoading} />
     </>

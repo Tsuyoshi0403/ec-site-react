@@ -2,6 +2,7 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "files.autoSave": "onFocusChange",
+  "npm.packageManager": "yarn",
   "cSpell.userWords": [
     "Svgs",
     "autofetch",
@@ -9,6 +10,7 @@
     "HHKB",
     "Swiper",
     "jtkn",
-    "xclockwise"
+    "xclockwise",
+    "sanitised"
   ]
 }
