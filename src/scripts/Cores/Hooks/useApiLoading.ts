@@ -5,6 +5,7 @@ import JWTUtil from '../Utils/JWTUtil'
 import ApiRefresh from '../Api/ApiRefresh'
 import ApiError, { ApiErrorKind } from '../Api/ApiError'
 import useAsyncError from './useAsyncError'
+import useNotification from './useNotification'
 
 /** API関数の型定義 */
 export declare type ApiFunction<Request, Response extends ICommonResponse> = (
@@ -38,6 +39,7 @@ export const useApiLoading = <Request, Response extends ICommonResponse>(
   showLoading = true
 ): { execApi: ExecApiFunction<Request, Response> } => {
   const setLoading = useSetRecoilState(LoadingState)
+  const { showWarnNotification } = useNotification()
   const throwError = useAsyncError()
 
   const execApi: ExecApiFunction<Request, Response> = async ({
@@ -76,13 +78,14 @@ export const useApiLoading = <Request, Response extends ICommonResponse>(
 
           case ApiErrorKind.API_ERROR:
             if (e.errorResponse) {
-              message = e.errorResponse.errorMessage.replace('\\n', '\n')
+              message = e.errorResponse.message.replace('\\n', '\n')
             }
             break
           default:
             message = 'エラーが発生しました : ' + e.message
             break
         }
+        showWarnNotification(message)
       } else if (e instanceof Error) {
         throwError(e)
       } else {

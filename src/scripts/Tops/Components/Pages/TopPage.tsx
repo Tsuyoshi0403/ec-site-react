@@ -4,6 +4,7 @@ import LoadingState from '../../../Cores/Recoil/LoadingState'
 import Loading from '../../../Cores/Components/Organisms/Loading'
 import NewLoginPageContainers from '../../Containers/Pages/NewLoginPage'
 import AuthRoute from './AuthRoute'
+import Notification from '../../../Cores/Components/Atoms/Notification'
 
 /**
  * Topコンポーネント
@@ -19,6 +20,7 @@ const TopPage = (): JSX.Element => {
         <Route path="/login" element={<NewLoginPageContainers />} />
       </Routes>
       <Loading open={isLoading} />
+      <Notification />
     </>
   )
 }
