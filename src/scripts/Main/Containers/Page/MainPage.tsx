@@ -1,17 +1,15 @@
 import { useEffect } from 'react'
 import MainPage from '../../Components/Page/MainPage'
 import RakutenApiItemSearch from '../../../Cores/Api/RakutenApiItemSearch'
-import useRakutenApiLoading from '../../../Cores/Hooks/useRakutenApiLoading'
+import useApiLoading from '../../../Cores/Hooks/useApiLoading'
 
 const MainPageContainers = () => {
-  const { execApi: execRakutenApiGet } = useRakutenApiLoading(
-    RakutenApiItemSearch.get
-  )
+  const { execApi: execRakutenApiGet } = useApiLoading(RakutenApiItemSearch.get)
 
   useEffect(() => {
     // リクエストデータを直接セット
     const requestData = {
-      keyword: '楽天',
+      keyword: '',
     }
 
     // APIを実行
@@ -19,6 +17,7 @@ const MainPageContainers = () => {
       request: requestData,
       successCallback: (response) => {
         console.log(response.Items[0].Item.itemName)
+        console.log(response.error_description)
       },
     })
   }, [])

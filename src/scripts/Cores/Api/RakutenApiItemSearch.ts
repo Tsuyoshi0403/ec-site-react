@@ -1,3 +1,4 @@
+import { ICommonResponse } from '../Utils/ApiUtil'
 import Http, { IRakutenErrorResponse } from '../Utils/RakutenApiUtil'
 
 type IItemSearchRequest = {
@@ -5,7 +6,7 @@ type IItemSearchRequest = {
   keyword: string
 }
 
-type IItemSearchResponse = IRakutenErrorResponse & {
+type IItemSearchResponse = ICommonResponse & {
   /** レスポンス */
   Items: Array<{
     Item: {
