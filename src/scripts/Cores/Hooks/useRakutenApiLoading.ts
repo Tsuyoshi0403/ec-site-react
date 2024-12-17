@@ -6,11 +6,13 @@ import ApiRefresh from '../Api/ApiRefresh'
 import ApiError, { ApiErrorKind } from '../Api/ApiError'
 import useAsyncError from './useAsyncError'
 import useNotification from './useNotification'
+import { IRakutenErrorResponse } from '../Utils/RakutenApiUtil'
 
 /** API関数の型定義 */
-export declare type ApiFunction<Request, Response extends ICommonResponse> = (
-  request?: Request
-) => Promise<Response>
+export declare type ApiFunction<
+  Request,
+  Response extends IRakutenErrorResponse,
+> = (request?: Request) => Promise<Response>
 
 /** 成功時のコールバック */
 export type SuccessCallback<Response> = (response: Response) => void
@@ -20,7 +22,7 @@ export type ErrorCallback = (e: any) => boolean | void
 /** 実行API関数の型定義 */
 export declare type ExecApiFunction<
   Request,
-  Response extends ICommonResponse,
+  Response extends IRakutenErrorResponse,
 > = (params: {
   request?: Request
   successCallback?: SuccessCallback<Response>
@@ -34,7 +36,10 @@ let execApiCount = 0
  * @param apiFunc
  * @param showLoading
  */
-export const useApiLoading = <Request, Response extends ICommonResponse>(
+export const useRakutenApiLoading = <
+  Request,
+  Response extends IRakutenErrorResponse,
+>(
   apiFunc: ApiFunction<Request, Response>,
   showLoading = true
 ): { execApi: ExecApiFunction<Request, Response> } => {
@@ -54,7 +59,7 @@ export const useApiLoading = <Request, Response extends ICommonResponse>(
     }
     try {
       if (JWTUtil.existsToken() && JWTUtil.checkTokenExpired()) {
-        // TODO: 安田 refreshAPI実装が完了後、API繋ぎ込みをする
+        // TODO: refreshAPI実装が完了後、API繋ぎ込みをする
         // await ApiRefresh.post()
       }
 
@@ -85,7 +90,7 @@ export const useApiLoading = <Request, Response extends ICommonResponse>(
             }
             break
           default:
-            message = 'エラーが発生しました : ' + e.message
+            message = `code:[${e.status}]\nエラーが発生しました : ${e.errorResponse}`
             break
         }
         showWarnNotification(message)
@@ -110,4 +115,4 @@ export const useApiLoading = <Request, Response extends ICommonResponse>(
   return { execApi }
 }
 
-export default useApiLoading
+export default useRakutenApiLoading

@@ -5,6 +5,8 @@ export const ApiErrorKind = {
   REQUEST_FAILED: 100,
   /** APIから返却されたエラー */
   API_ERROR: 200,
+  /** なし */
+  NONE: 0,
 } as const
 
 export type ApiErrorKindType = (typeof ApiErrorKind)[keyof typeof ApiErrorKind]
@@ -16,14 +18,14 @@ export default class ApiError extends Error {
   readonly response: Response
   readonly status: number
   readonly errorKind: ApiErrorKindType
-  readonly errorResponse?: IErrorResponse
+  readonly errorResponse?: IErrorResponse | string
 
   constructor(
     e: string,
     response: Response,
     status: number,
     errorKind: ApiErrorKindType,
-    errorResponse?: IErrorResponse
+    errorResponse?: IErrorResponse | string
   ) {
     super(e)
     this.name = new.target.name
