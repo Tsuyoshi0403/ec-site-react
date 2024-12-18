@@ -38,8 +38,6 @@ const MainPage = ({ items }: IProps): JSX.Element => {
   const freshShovelerItems = items.slice(12, 24)
   return (
     <div className={rootStyle}>
-      {/* ヘッダー */}
-      <NewHeader />
       {/* スライドショー */}
       <SlideShow />
       <div className="card-container">
