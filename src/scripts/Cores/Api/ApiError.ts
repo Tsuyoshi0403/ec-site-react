@@ -1,6 +1,8 @@
 import { IErrorResponse } from '../Utils/ApiUtil'
 
 export const ApiErrorKind = {
+  /** なし */
+  NONE: 0,
   /** リクエストエラー */
   REQUEST_FAILED: 100,
   /** APIから返却されたエラー */
@@ -17,13 +19,15 @@ export default class ApiError extends Error {
   readonly status: number
   readonly errorKind: ApiErrorKindType
   readonly errorResponse?: IErrorResponse
+  readonly errorDescription?: string
 
   constructor(
     e: string,
     response: Response,
     status: number,
     errorKind: ApiErrorKindType,
-    errorResponse?: IErrorResponse
+    errorResponse?: IErrorResponse,
+    errorDescription?: string
   ) {
     super(e)
     this.name = new.target.name
@@ -31,6 +35,7 @@ export default class ApiError extends Error {
     this.status = status
     this.errorKind = errorKind
     this.errorResponse = errorResponse
+    this.errorDescription = errorDescription
     // 下記の行いはTypeScriptの出力ターゲットがES2015より古い場合(ES3,ESS)のみ必要
     Object.setPrototypeOf(this, new.target.prototype)
   }

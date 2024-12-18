@@ -1,8 +1,4 @@
 import { css } from '@emotion/css'
-import Keyboard3 from '../../../assets/images/Keyboard3.jpg'
-import CoffeeMachine from '../../../assets/images/CoffeeMachine.jpg'
-import CoffeeMachine2 from '../../../assets/images/CoffeeMachine2.jpg'
-import PowerBelt from '../../../assets/images/PowerBelt.jpg'
 
 const rootStyle = css`
   height: 450px;
@@ -39,27 +35,30 @@ const rootStyle = css`
   }
 `
 
+type IProps = {
+  /** 商品一覧 */
+  items: Array<{
+    /** 商品名 */
+    name: string
+    /** 商品画像URL */
+    imageUrl: string
+  }>
+}
+
 /**
  * 再び購入商品コンポーネント
  * @returns {JSX.Element}
  */
-const RebuyItems = (): JSX.Element => {
+const RebuyItems = ({ items }: IProps): JSX.Element => {
   return (
     <div className={rootStyle}>
       <h2 className="card-title">再び購入</h2>
-      <div className={'card-body re-buy-card-body'}>
-        <a className="card-a re-buy-card-a">
-          <img className="card-image" src={Keyboard3} alt="再び購入商品" />
-        </a>
-        <a className="card-a re-buy-card-a">
-          <img className="card-image" src={CoffeeMachine} alt="再び購入商品" />
-        </a>
-        <a className="card-a re-buy-card-a">
-          <img className="card-image" src={PowerBelt} alt="再び購入商品" />
-        </a>
-        <a className={'card-a re-buy-card-a'}>
-          <img className="card-image" src={CoffeeMachine2} alt="再び購入商品" />
-        </a>
+      <div className="card-body re-buy-card-body">
+        {items.map((item, index) => (
+          <a key={index} className="card-a re-buy-card-a">
+            <img className="card-image" src={item.imageUrl} alt={item.name} />
+          </a>
+        ))}
       </div>
     </div>
   )

@@ -68,21 +68,21 @@ export const useApiLoading = <Request, Response extends ICommonResponse>(
         if (!shouldContinue) return false
       }
 
-      // TODO:安田 バックエンドのエラーレスポンスを実装したらチェックする
       if (e instanceof ApiError) {
         let message = ''
         switch (e.errorKind) {
           case ApiErrorKind.REQUEST_FAILED:
             message = '通信に失敗しました。 status : ' + e.status
             break
-
           case ApiErrorKind.API_ERROR:
             if (e.errorResponse) {
               message = e.errorResponse.message.replace('\\n', '\n')
             }
             break
           default:
-            message = 'エラーが発生しました : ' + e.message
+            message = `code:[${e.status}]\nエラーが発生しました : ${
+              e.errorDescription ? e.errorDescription : e.message
+            }`
             break
         }
         showWarnNotification(message)

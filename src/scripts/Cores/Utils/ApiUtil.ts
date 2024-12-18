@@ -57,6 +57,8 @@ export type IErrorResponse = {
 export type ICommonResponse = {
   /** エラー内容 */
   error?: IErrorResponse
+  /** エラー詳細 */
+  error_description?: string
   /** JWT */
   jtkn?: string
   /** リフレッシュトークン */

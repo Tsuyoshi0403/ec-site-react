@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
-import MainPage from '../../../Main/Components/Page/MainPage'
+import MainPageContainers from '../../../Main/Containers/Page/MainPage'
 
 /**
  * ログイン後のダッシュボードページ
@@ -11,7 +11,7 @@ export default function Dashboard(): JSX.Element {
     <div>
       {/** メイン領域 */}
       <Routes>
-        <Route path="/" element={<MainPage />} />
+        <Route path="/" element={<MainPageContainers />} />
       </Routes>
     </div>
   )

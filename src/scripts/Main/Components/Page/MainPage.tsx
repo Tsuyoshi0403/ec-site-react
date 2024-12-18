@@ -15,11 +15,27 @@ const rootStyle = css`
   }
 `
 
+type IProps = {
+  /** 商品一覧 */
+  items: Array<{
+    /** 商品名 */
+    name: string
+    /** 商品価格 */
+    price: number
+    /** 商品画像URL */
+    imageUrl: string
+  }>
+}
+
 /**
  * メイン画面
  * @returns {JSX.Element}
  */
-const MainPage = (): JSX.Element => {
+const MainPage = ({ items }: IProps): JSX.Element => {
+  const saleItems = items.slice(0, 4)
+  const recommendedItems = items.slice(4, 8)
+  const rebuyItems = items.slice(8, 12)
+  const freshShovelerItems = items.slice(12, 24)
   return (
     <div className={rootStyle}>
       {/* ヘッダー */}
@@ -28,14 +44,14 @@ const MainPage = (): JSX.Element => {
       <SlideShow />
       <div className="card-container">
         {/* セール商品 */}
-        <SaleItems />
+        <SaleItems items={saleItems} />
         {/* 閲覧履歴のおすすめ */}
-        <RecommendedItems />
+        <RecommendedItems items={recommendedItems} />
         {/* 再び購入商品 */}
-        <RebuyItems />
+        <RebuyItems items={rebuyItems} />
       </div>
       {/* お客様が閲覧した商品に関連する商品・チェックした関連商品 */}
-      <FreshShoveler />
+      <FreshShoveler items={freshShovelerItems} />
     </div>
   )
 }
