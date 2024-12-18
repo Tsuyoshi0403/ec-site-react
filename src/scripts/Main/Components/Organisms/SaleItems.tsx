@@ -1,8 +1,4 @@
 import { css } from '@emotion/css'
-import TrackballMouse from '../../../assets/images/TrackballMouse.jpg'
-import Keyboard1 from '../../../assets/images/Keyboard1.jpg'
-import Keyboard2 from '../../../assets/images/Keyboard2.jpg'
-import Mouse1 from '../../../assets/images/Mouse1.jpg'
 
 const rootStyle = css`
   height: 450px;
@@ -50,59 +46,38 @@ const rootStyle = css`
   }
 `
 
+type IProps = {
+  /** 商品一覧 */
+  items: Array<{
+    /** 商品名 */
+    name: string
+    /** 商品価格 */
+    price: number
+    /** 商品画像URL */
+    imageUrl: string
+  }>
+}
+
 /**
  * セールス商品コンポーネント
  * @returns {JSX.Element}
  */
-const SaleItems = (): JSX.Element => {
+const SaleItems = ({ items }: IProps): JSX.Element => {
   return (
     <div className={rootStyle}>
       <h2 className="card-title">セール商品のお買いモノを続ける</h2>
       <div className="card-body">
-        <a className="card-a">
-          <img
-            className="card-image"
-            src={TrackballMouse}
-            alt="セール商品のお買いモノを続ける"
-          />
-          <div className="card-product">
-            <span className="card-off-txt">25%OFF</span>
-            <span className="card-time-sale-txt">タイムセール</span>
-          </div>
-        </a>
-        <a className="card-a">
-          <img
-            className="card-image"
-            src={Keyboard1}
-            alt="セール商品のお買いモノを続ける"
-          />
-          <div className="card-product">
-            <span className="card-off-txt">11%OFF</span>
-            <span className="card-time-sale-txt">タイムセール</span>
-          </div>
-        </a>
-        <a className="card-a">
-          <img
-            className="card-image"
-            src={Keyboard2}
-            alt="セール商品のお買いモノを続ける"
-          />
-          <div className="card-product">
-            <span className="card-off-txt">19%OFF</span>
-            <span className="card-time-sale-txt">タイムセール</span>
-          </div>
-        </a>
-        <a className="card-a">
-          <img
-            className="card-image"
-            src={Mouse1}
-            alt="セール商品のお買いモノを続ける"
-          />
-          <div className="card-product">
-            <span className="card-off-txt">14%OFF</span>
-            <span className="card-time-sale-txt">タイムセール</span>
-          </div>
-        </a>
+        {items.map((item, index) => (
+          <a className="card-a" key={index}>
+            <img className="card-image" src={item.imageUrl} alt={item.name} />
+            <div className="card-product">
+              <span className="card-off-txt">
+                {Math.floor(Math.random() * 30) + 10}%OFF
+              </span>
+              <span className="card-time-sale-txt">タイムセール</span>
+            </div>
+          </a>
+        ))}
       </div>
     </div>
   )

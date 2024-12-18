@@ -1,7 +1,7 @@
 import { css } from '@emotion/css'
 import { ChangeEvent, useState } from 'react'
-import StringUtil from '../../../Cores/Utils/StringUtil'
 import classNames from 'classnames'
+import { IFormState } from '../../Containers/Pages/NewLoginPage'
 
 const rootStyle = css`
   display: flex;
@@ -92,7 +92,7 @@ const rootStyle = css`
   }
 `
 
-type IFormState = {
+type IProps = {
   /** ログインID */
   loginId: string
   /** パスワード */
@@ -101,45 +101,23 @@ type IFormState = {
   loginIdError: boolean
   /** パスワードエラーフラグ */
   passwordError: boolean
+  /** ログインボタン押下時のコールバック */
+  onSubmitLogin: (e: React.FormEvent) => void
+  /** データ変更時処理のコールバック */
+  onChange: (
+    key: keyof IFormState
+  ) => (e: ChangeEvent<HTMLInputElement>) => void
+  /** ログインIDのバリデーション処理 */
+  validateLoginId: () => void
 }
 
 /**
  * ログイン画面
  * @returns {JSX.Element}
  */
-const NewLoginPage = (): JSX.Element => {
+const NewLoginPage = (props: IProps): JSX.Element => {
   const [emailFocus, setEmailFocus] = useState<boolean>(false)
   const [passwordFocus, setPasswordFocus] = useState<boolean>(false)
-  const [formState, setFormState] = useState<IFormState>({
-    loginId: '',
-    password: '',
-    loginIdError: false,
-    passwordError: false,
-  })
-
-  /**
-   * フォーム送信時の処理
-   */
-  const onSubmit = () => {}
-
-  /**
-   * データ変更時の処理
-   * @param key - フォームのキー
-   */
-  const onChange =
-    (key: keyof IFormState) => (e: ChangeEvent<HTMLInputElement>) => {
-      setFormState({ ...formState, [key]: e.target.value })
-    }
-
-  /**
-   * ログインIDのバリデーション関数
-   */
-  const validateLoginId = () => {
-    // メールアドレスがあるかつアドレスフォーマットが正しくない場合はログインIDエラー
-    const loginIdError =
-      !!formState.loginId && !StringUtil.checkFormatMail(formState.loginId)
-    setFormState({ ...formState, loginIdError })
-  }
 
   return (
     <div className={rootStyle}>
@@ -147,12 +125,12 @@ const NewLoginPage = (): JSX.Element => {
         <div className="login-title-area">
           <h1 className="login-title-text">LOGIN</h1>
         </div>
-        <form className="login-from-area" onSubmit={onSubmit}>
+        <form className="login-from-area" onSubmit={props.onSubmitLogin}>
           <div className="login-input">
-            {(formState.loginIdError || emailFocus) && (
+            {(props.loginIdError || emailFocus) && (
               <label
                 className={classNames('login-label', {
-                  'label-error': formState.loginIdError,
+                  'label-error': props.loginIdError,
                 })}
               >
                 メールアドレス
@@ -160,24 +138,24 @@ const NewLoginPage = (): JSX.Element => {
             )}
             <input
               className={classNames('login-input-text', {
-                'input-error': formState.loginIdError,
+                'input-error': props.loginIdError,
               })}
               placeholder="メールアドレス"
               type="text"
-              value={formState.loginId}
-              onChange={onChange('loginId')}
+              value={props.loginId}
+              onChange={props.onChange('loginId')}
               onFocus={() => setEmailFocus(true)}
               onBlur={() => {
                 setEmailFocus(false)
-                validateLoginId()
+                props.validateLoginId()
               }}
             />
           </div>
           <div className="login-input">
-            {(formState.passwordError || passwordFocus) && (
+            {(props.passwordError || passwordFocus) && (
               <label
                 className={classNames('login-label', {
-                  'label-error': formState.passwordError,
+                  'label-error': props.passwordError,
                 })}
               >
                 パスワード
@@ -185,12 +163,12 @@ const NewLoginPage = (): JSX.Element => {
             )}
             <input
               className={classNames('login-input-text', {
-                'input-error': formState.passwordError,
+                'input-error': props.passwordError,
               })}
               placeholder="パスワード"
               type="password"
-              value={formState.password}
-              onChange={onChange('password')}
+              value={props.password}
+              onChange={props.onChange('password')}
               onFocus={() => setPasswordFocus(true)}
               onBlur={() => setPasswordFocus(false)}
             />
@@ -200,10 +178,10 @@ const NewLoginPage = (): JSX.Element => {
               className="login-btn"
               type="submit"
               disabled={
-                formState.loginIdError ||
-                formState.passwordError ||
-                !formState.loginId ||
-                !formState.password
+                props.loginIdError ||
+                props.passwordError ||
+                !props.loginId ||
+                !props.password
               }
             >
               ログイン

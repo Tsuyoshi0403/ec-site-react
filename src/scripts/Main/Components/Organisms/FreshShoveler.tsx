@@ -1,11 +1,4 @@
 import { css } from '@emotion/css'
-import TrackballMouse from '../../../assets/images/TrackballMouse.jpg'
-import Keyboard1 from '../../../assets/images/Keyboard1.jpg'
-import Keyboard2 from '../../../assets/images/Keyboard2.jpg'
-import Keyboard3 from '../../../assets/images/Keyboard3.jpg'
-import CoffeeMachine from '../../../assets/images/CoffeeMachine.jpg'
-import CoffeeMachine2 from '../../../assets/images/CoffeeMachine2.jpg'
-import PowerBelt from '../../../assets/images/PowerBelt.jpg'
 
 const rootStyle = css`
   .fresh-shoveler-card {
@@ -41,11 +34,21 @@ const rootStyle = css`
   }
 `
 
+type IProps = {
+  /** 商品一覧 */
+  items: Array<{
+    /** 商品画像URL */
+    imageUrl: string
+  }>
+}
+
 /**
- * 新しい商品更新コンポーネント
+ * お客様が閲覧した商品に関連する商品・チェックした関連商品コンポーネント
  * @returns {JSX.Element}
  */
-const FreshShoveler = (): JSX.Element => {
+const FreshShoveler = ({ items }: IProps): JSX.Element => {
+  const relatedItems = items.slice(0, 6)
+  const checkedItems = items.slice(6, 12)
   return (
     <div className={rootStyle}>
       <div className="fresh-shoveler-card">
@@ -53,146 +56,39 @@ const FreshShoveler = (): JSX.Element => {
           お客様が閲覧した商品に関連する商品
         </h2>
         <ul className="fresh-shoveler-ul">
-          <li className="fresh-shoveler-li">
-            <span className="fresh-shoveler-span">
-              <a className="fresh-shoveler-a">
-                <img
-                  className="fresh-shoveler-img"
-                  src={CoffeeMachine2}
-                  alt="お客様が閲覧した商品に関連する商品"
-                />
-              </a>
-            </span>
-          </li>
-          <li className="fresh-shoveler-li">
-            <span className="fresh-shoveler-span">
-              <a className="fresh-shoveler-a">
-                <img
-                  className="fresh-shoveler-img"
-                  src={Keyboard3}
-                  alt="お客様が閲覧した商品に関連する商品"
-                />
-              </a>
-            </span>
-          </li>
-          <li className="fresh-shoveler-li">
-            <span className="fresh-shoveler-span">
-              <a className="fresh-shoveler-a">
-                <img
-                  className="fresh-shoveler-img"
-                  src={PowerBelt}
-                  alt="お客様が閲覧した商品に関連する商品"
-                />
-              </a>
-            </span>
-          </li>
-          <li className="fresh-shoveler-li">
-            <span className="fresh-shoveler-span">
-              <a className="fresh-shoveler-a">
-                <img
-                  className="fresh-shoveler-img"
-                  src={CoffeeMachine2}
-                  alt="お客様が閲覧した商品に関連する商品"
-                />
-              </a>
-            </span>
-          </li>
-          <li className="fresh-shoveler-li">
-            <span className="fresh-shoveler-span">
-              <a className="fresh-shoveler-a">
-                <img
-                  className="fresh-shoveler-img"
-                  src={PowerBelt}
-                  alt="お客様が閲覧した商品に関連する商品"
-                />
-              </a>
-            </span>
-          </li>
-          <li className="fresh-shoveler-li">
-            <span className="fresh-shoveler-span">
-              <a className="fresh-shoveler-a">
-                <img
-                  className="fresh-shoveler-img"
-                  src={TrackballMouse}
-                  alt="お客様が閲覧した商品に関連する商品"
-                />
-              </a>
-            </span>
-          </li>
+          {relatedItems.map((item, index) => (
+            <li className="fresh-shoveler-li" key={`related-${index}`}>
+              <span className="fresh-shoveler-span">
+                <a className="fresh-shoveler-a">
+                  <img
+                    className="fresh-shoveler-img"
+                    src={item.imageUrl}
+                    alt="お客様が閲覧した商品に関連する商品"
+                  />
+                </a>
+              </span>
+            </li>
+          ))}
         </ul>
       </div>
-      {/* チェックした関連商品 */}
       <div className="fresh-shoveler-card">
         <h2 className="fresh-shoveler-title">
           この商品をチェックした人はこんな商品もチェックしています
         </h2>
         <ul className="fresh-shoveler-ul">
-          <li className="fresh-shoveler-li">
-            <span className="fresh-shoveler-span">
-              <a className="fresh-shoveler-a">
-                <img
-                  className="fresh-shoveler-img"
-                  src={CoffeeMachine}
-                  alt="お客様が閲覧した商品に関連する商品"
-                />
-              </a>
-            </span>
-          </li>
-          <li className="fresh-shoveler-li">
-            <span className="fresh-shoveler-span">
-              <a className="fresh-shoveler-a">
-                <img
-                  className="fresh-shoveler-img"
-                  src={Keyboard3}
-                  alt="お客様が閲覧した商品に関連する商品"
-                />
-              </a>
-            </span>
-          </li>
-          <li className="fresh-shoveler-li">
-            <span className="fresh-shoveler-span">
-              <a className="fresh-shoveler-a">
-                <img
-                  className="fresh-shoveler-img"
-                  src={Keyboard2}
-                  alt="お客様が閲覧した商品に関連する商品"
-                />
-              </a>
-            </span>
-          </li>
-          <li className="fresh-shoveler-li">
-            <span className="fresh-shoveler-span">
-              <a className="fresh-shoveler-a">
-                <img
-                  className="fresh-shoveler-img"
-                  src={TrackballMouse}
-                  alt="お客様が閲覧した商品に関連する商品"
-                />
-              </a>
-            </span>
-          </li>
-          <li className="fresh-shoveler-li">
-            <span className="fresh-shoveler-span">
-              <a className="fresh-shoveler-a">
-                <img
-                  className="fresh-shoveler-img"
-                  src={PowerBelt}
-                  alt="お客様が閲覧した商品に関連する商品"
-                />
-              </a>
-            </span>
-          </li>
-          <li className="fresh-shoveler-li">
-            <span className="fresh-shoveler-span">
-              <a className="fresh-shoveler-a">
-                <img
-                  className="fresh-shoveler-img"
-                  src={Keyboard1}
-                  alt="お客様が閲覧した商品に関連する商品"
-                />
-              </a>
-            </span>
-          </li>
+          {checkedItems.map((item, index) => (
+            <li className="fresh-shoveler-li" key={`checked-${index}`}>
+              <span className="fresh-shoveler-span">
+                <a className="fresh-shoveler-a">
+                  <img
+                    className="fresh-shoveler-img"
+                    src={item.imageUrl}
+                    alt="この商品をチェックした人はこんな商品もチェックしています"
+                  />
+                </a>
+              </span>
+            </li>
+          ))}
         </ul>
       </div>
     </div>

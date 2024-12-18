@@ -1,26 +1,27 @@
-import { Route, Routes, useLocation } from 'react-router-dom'
-import NewLoginPage from './NewLoginPage'
-import MainPage from '../../../Main/Components/Page/MainPage'
-import NewHeader from '../Organisms/NewHeader '
-import ProductPage from '../../../Product/Components/Pages/ProductPage'
+import { Route, Routes } from 'react-router-dom'
+import { useRecoilValue } from 'recoil'
+import LoadingState from '../../../Cores/Recoil/LoadingState'
+import Loading from '../../../Cores/Components/Organisms/Loading'
+import NewLoginPageContainers from '../../Containers/Pages/NewLoginPage'
+import AuthRoute from './AuthRoute'
+import Notification from '../../../Cores/Components/Atoms/Notification'
 
 /**
- * Topページ
+ * Topコンポーネント
  * @returns {JSX.Element}
  */
 const TopPage = (): JSX.Element => {
-  const location = useLocation()
+  const isLoading = useRecoilValue(LoadingState)
   return (
-    <div>
-      {/** ヘッダー */}
-      {location.pathname !== '/login' && <NewHeader />}
-      {/** メイン領域 */}
+    <>
       <Routes>
-        <Route path="/login" element={<NewLoginPage />} />
-        <Route path="/" element={<MainPage />} />
-        <Route path="/product" element={<ProductPage />} />
+        {/** 未ログイン時はログインページにリダイレクト、ログイン済みはメインページを表示 */}
+        <Route path="/*" element={<AuthRoute path="/*" />} />
+        <Route path="/login" element={<NewLoginPageContainers />} />
       </Routes>
-    </div>
+      <Loading open={isLoading} />
+      <Notification />
+    </>
   )
 }
 
