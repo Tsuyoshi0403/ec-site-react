@@ -1,28 +1,32 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import MainPage from '../../Components/Page/MainPage'
-import RakutenApiItemSearch from '../../../Cores/Api/RakutenApiItemSearch'
 import useApiLoading from '../../../Cores/Hooks/useApiLoading'
+import RakutenApiRanking, {
+  IRankingResponse,
+} from '../../../Cores/Api/RakutenApiRanking'
 
 const MainPageContainers = () => {
-  const { execApi: execRakutenApiGet } = useApiLoading(RakutenApiItemSearch.get)
+  const { execApi: execRakutenApiGet } = useApiLoading(RakutenApiRanking.get)
+  const [items, setItems] = useState<IRankingResponse['Items']>([])
 
   useEffect(() => {
-    // リクエストデータを直接セット
-    const requestData = {
-      keyword: '',
-    }
-
-    // APIを実行
     execRakutenApiGet({
-      request: requestData,
       successCallback: (response) => {
-        console.log(response.Items[0].Item.itemName)
-        console.log(response.error_description)
+        // 商品データを状態にセット
+        setItems(response.Items)
       },
     })
   }, [])
 
-  return <MainPage />
+  return (
+    <MainPage
+      items={items.map((item) => ({
+        name: item.Item.itemName,
+        price: item.Item.itemPrice,
+        imageUrl: item.Item.mediumImageUrls[0]?.imageUrl,
+      }))}
+    />
+  )
 }
 
 export default MainPageContainers
