@@ -53,23 +53,35 @@ type IProps = {
     name: string
     /** 商品価格 */
     price: number
+    /** 商品コード */
+    itemCode: string
     /** 商品画像URL */
     imageUrl: string
   }>
+  /** 商品選択時の処理 */
+  onSelectItem: (itemCode: string) => void
 }
 
 /**
  * セールス商品コンポーネント
  * @returns {JSX.Element}
  */
-const SaleItems = ({ items }: IProps): JSX.Element => {
+const SaleItems = ({ items, onSelectItem }: IProps): JSX.Element => {
   return (
     <div className={rootStyle}>
       <h2 className="card-title">セール商品のお買いモノを続ける</h2>
       <div className="card-body">
         {items.map((item, index) => (
-          <a className="card-a" key={index}>
-            <img className="card-image" src={item.imageUrl} alt={item.name} />
+          <a
+            className="card-a"
+            key={index}
+            onClick={() => onSelectItem(item.itemCode)}
+          >
+            <img
+              className="card-image"
+              src={item.imageUrl.replace(/\?_ex=\d+x\d+$/, '')}
+              alt={item.name}
+            />
             <div className="card-product">
               <span className="card-off-txt">
                 {Math.floor(Math.random() * 30) + 10}%OFF

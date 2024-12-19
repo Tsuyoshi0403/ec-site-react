@@ -12,11 +12,14 @@ const rootStyle = css`
     .product-wrapper {
       display: flex;
       .image-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         height: 400px;
         width: 500px;
         .image {
-          height: 376px;
-          width: 320px;
+          max-height: 100%;
+          max-width: 100%;
           object-fit: contain;
         }
       }
@@ -65,11 +68,39 @@ const rootStyle = css`
     }
   }
 `
+
+type IProps = {
+  /** 商品一覧 */
+  items: Array<{
+    Item: {
+      /** 商品名 */
+      itemName: string
+      /** 商品価格 */
+      itemPrice: number
+      /** 星評価 */
+      reviewAverage: number
+      /** 商品詳細 */
+      itemCaption: string
+      /** 販売ショップ */
+      shopName: string
+      /** 商品コード */
+      itemCode: string
+      /** 送料区分 */
+      postageFlag: number
+      /** 商品画像URL一覧 */
+      mediumImageUrls: Array<{
+        /** 商品画像URL */
+        imageUrl: string
+      }>
+    }
+  }>
+}
+
 /**
  * 商品画面
  * @returns {JSX.Element}
  */
-const ProductPage = (): JSX.Element => {
+const ProductPage = ({ items }: IProps): JSX.Element => {
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1)
   const quantities = Array.from({ length: 10 }, (_, index) => index + 1)
 
@@ -78,20 +109,35 @@ const ProductPage = (): JSX.Element => {
     setSelectedQuantity(Number(event.target.value))
   }
 
+  // itemsの最初の商品の情報を表示
+  const product = items.length > 0 ? items[0].Item : null
+
   return (
     <div className={rootStyle}>
       <div className="product-container">
         <div className="product-wrapper">
           <div className="image-section">
-            <img className="image" src={CoffeeMachine} alt="商品画像" />
+            <img
+              className="image"
+              src={product?.mediumImageUrls[0].imageUrl.replace(
+                /\?_ex=\d+x\d+$/,
+                ''
+              )}
+              alt="商品画像"
+            />
           </div>
           <div className="product-info">
-            <h1 className="product-title">
-              ネスカフェ ゴールドブレンド バリスタアイ レッド SPM9635-R
-            </h1>
-            <StarRating className="star-area" score={3.5} />
+            <h1 className="product-title">{product?.itemName}</h1>
+            <StarRating
+              className="star-area"
+              score={product?.reviewAverage || 0}
+            />
             <p>
-              <span className="product-price">10,000</span>
+              <span className="product-price">
+                {product?.itemPrice
+                  ? new Intl.NumberFormat().format(product.itemPrice)
+                  : '0'}
+              </span>
               <span>円</span>
             </p>
             <div>
@@ -116,7 +162,12 @@ const ProductPage = (): JSX.Element => {
           </div>
         </div>
         {/** 商品情報 */}
-        <ProductDetail />
+        <ProductDetail
+          shopName={product?.shopName ? product.shopName : ''}
+          itemCode={product?.itemCode ? product.itemCode : ''}
+          postageFlag={product?.postageFlag ? product.postageFlag : 0}
+          itemCaption={product?.itemCaption ? product.itemCaption : ''}
+        />
       </div>
     </div>
   )
