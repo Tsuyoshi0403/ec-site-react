@@ -1,23 +1,35 @@
 import { Route, Routes } from 'react-router-dom'
 import MainPageContainers from '../../../Main/Containers/Page/MainPage'
-import ProductPage from '../../../Product/Components/Pages/ProductPage'
 import NewHeader from '../Organisms/NewHeader'
+import ProductPageContainers from '../../../Product/Containers/Pages/ProductPage'
+import { css } from '@emotion/css'
+
+const mainStyle = css`
+  display: flex;
+  flex-direction: column;
+
+  .main-content {
+    height: calc(100vh - 80px);
+    overflow-y: scroll;
+  }
+`
 
 /**
  * ログイン後のダッシュボードページ
  * @constructor
  */
-
 export default function Dashboard(): JSX.Element {
   return (
-    <div>
+    <div className={mainStyle}>
       {/** ヘッダー */}
       <NewHeader />
       {/** メイン領域 */}
-      <Routes>
-        <Route path="/" element={<MainPageContainers />} />
-        <Route path="/product" element={<ProductPage />} />
-      </Routes>
+      <div className="main-content">
+        <Routes>
+          <Route path="/" element={<MainPageContainers />} />
+          <Route path="/product" element={<ProductPageContainers />} />
+        </Routes>
+      </div>
     </div>
   )
 }

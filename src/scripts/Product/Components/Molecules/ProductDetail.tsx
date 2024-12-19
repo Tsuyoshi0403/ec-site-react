@@ -21,30 +21,44 @@ const rootStyle = css`
     }
   }
 `
+
+type IProps = {
+  /** 販売ショップ */
+  shopName: string
+  /** 商品コード */
+  itemCode: string
+  /** 送料区分 */
+  postageFlag: number
+  /** 商品説明 */
+  itemCaption: string
+}
+
 /**
  * 商品情報コンポーネント
  * @returns {JSX.Element}
  */
-const ProductDetail = (): JSX.Element => {
+const ProductDetail = (props: IProps): JSX.Element => {
   return (
     <div className={rootStyle}>
       <div className="product-details-container">
         <h1 className="details-title">商品情報</h1>
         <div className="product-detail">
-          <span className="detail-label">販売元</span>:
-          <span className="detail-value">ネスレ日本株式会社</span>
+          <span className="detail-label">販売ショップ</span>:
+          <span className="detail-value">{props.shopName}</span>
         </div>
         <div className="product-detail">
-          <span className="detail-label">対応機種等</span>:
-          <span className="detail-value">Nestle(ネスレ)</span>
+          <span className="detail-label">商品コード</span>:
+          <span className="detail-value">{props.itemCode}</span>
         </div>
         <div className="product-detail">
-          <span className="detail-label">販売元</span>:
-          <span className="detail-value">HAD-S-KABAH</span>
+          <span className="detail-label">送料区分</span>:
+          <span className="detail-value">
+            {props.postageFlag ? '送料込み' : '送料無料'}
+          </span>
         </div>
         <div className="product-detail">
-          <span className="detail-label">JAN</span>:
-          <span className="detail-value">4902370550733</span>
+          <span className="detail-label">商品説明</span>:
+          <span className="detail-value">{props.itemCaption}</span>
         </div>
       </div>
     </div>

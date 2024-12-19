@@ -9,6 +9,8 @@ export type IRankingResponse = ICommonResponse & {
       itemName: string
       /** 商品価格 */
       itemPrice: number
+      /** 商品コード */
+      itemCode: string
       /** 商品画像URL一覧 */
       mediumImageUrls: Array<{
         /** 商品画像URL */

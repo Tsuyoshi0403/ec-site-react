@@ -40,23 +40,35 @@ type IProps = {
   items: Array<{
     /** 商品名 */
     name: string
+    /** 商品コード */
+    itemCode: string
     /** 商品画像URL */
     imageUrl: string
   }>
+  /** 商品選択時の処理 */
+  onSelectItem: (itemCode: string) => void
 }
 
 /**
  * 再び購入商品コンポーネント
  * @returns {JSX.Element}
  */
-const RebuyItems = ({ items }: IProps): JSX.Element => {
+const RebuyItems = ({ items, onSelectItem }: IProps): JSX.Element => {
   return (
     <div className={rootStyle}>
       <h2 className="card-title">再び購入</h2>
       <div className="card-body re-buy-card-body">
         {items.map((item, index) => (
-          <a key={index} className="card-a re-buy-card-a">
-            <img className="card-image" src={item.imageUrl} alt={item.name} />
+          <a
+            key={index}
+            className="card-a re-buy-card-a"
+            onClick={() => onSelectItem(item.itemCode)}
+          >
+            <img
+              className="card-image"
+              src={item.imageUrl.replace(/\?_ex=\d+x\d+$/, '')}
+              alt={item.name}
+            />
           </a>
         ))}
       </div>

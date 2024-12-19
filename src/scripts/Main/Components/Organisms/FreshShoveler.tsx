@@ -37,16 +37,20 @@ const rootStyle = css`
 type IProps = {
   /** 商品一覧 */
   items: Array<{
+    /** 商品コード */
+    itemCode: string
     /** 商品画像URL */
     imageUrl: string
   }>
+  /** 商品選択時の処理 */
+  onSelectItem: (itemCode: string) => void
 }
 
 /**
  * お客様が閲覧した商品に関連する商品・チェックした関連商品コンポーネント
  * @returns {JSX.Element}
  */
-const FreshShoveler = ({ items }: IProps): JSX.Element => {
+const FreshShoveler = ({ items, onSelectItem }: IProps): JSX.Element => {
   const relatedItems = items.slice(0, 6)
   const checkedItems = items.slice(6, 12)
   return (
@@ -59,10 +63,13 @@ const FreshShoveler = ({ items }: IProps): JSX.Element => {
           {relatedItems.map((item, index) => (
             <li className="fresh-shoveler-li" key={`related-${index}`}>
               <span className="fresh-shoveler-span">
-                <a className="fresh-shoveler-a">
+                <a
+                  className="fresh-shoveler-a"
+                  onClick={() => onSelectItem(item.itemCode)}
+                >
                   <img
                     className="fresh-shoveler-img"
-                    src={item.imageUrl}
+                    src={item.imageUrl.replace(/\?_ex=\d+x\d+$/, '')}
                     alt="お客様が閲覧した商品に関連する商品"
                   />
                 </a>
@@ -79,10 +86,13 @@ const FreshShoveler = ({ items }: IProps): JSX.Element => {
           {checkedItems.map((item, index) => (
             <li className="fresh-shoveler-li" key={`checked-${index}`}>
               <span className="fresh-shoveler-span">
-                <a className="fresh-shoveler-a">
+                <a
+                  className="fresh-shoveler-a"
+                  onClick={() => onSelectItem(item.itemCode)}
+                >
                   <img
                     className="fresh-shoveler-img"
-                    src={item.imageUrl}
+                    src={item.imageUrl.replace(/\?_ex=\d+x\d+$/, '')}
                     alt="この商品をチェックした人はこんな商品もチェックしています"
                   />
                 </a>

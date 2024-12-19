@@ -48,23 +48,35 @@ type IProps = {
     name: string
     /** 商品価格 */
     price: number
+    /** 商品コード */
+    itemCode: string
     /** 商品画像URL */
     imageUrl: string
   }>
+  /** 商品選択時の処理 */
+  onSelectItem: (itemCode: string) => void
 }
 
 /**
  * 閲覧履歴のおすすめコンポーネント
  * @returns {JSX.Element}
  */
-const RecommendedItems = ({ items }: IProps): JSX.Element => {
+const RecommendedItems = ({ items, onSelectItem }: IProps): JSX.Element => {
   return (
     <div className={rootStyle}>
       <h2 className="card-title">閲覧履歴に基づくおすすめ商品</h2>
       <div className="card-body">
         {items.map((item, index) => (
-          <a key={index} className="card-a">
-            <img className="card-image" src={item.imageUrl} alt={item.name} />
+          <a
+            key={index}
+            className="card-a"
+            onClick={() => onSelectItem(item.itemCode)}
+          >
+            <img
+              className="card-image"
+              src={item.imageUrl.replace(/\?_ex=\d+x\d+$/, '')}
+              alt={item.name}
+            />
             <div className="card-product">
               <span className="card-title-txt">{item.name}</span>
             </div>
