@@ -144,10 +144,21 @@ const rootStyle = css`
   }
 `
 
+type IProps = {
+  /** 子ジャンル情報 */
+  genres: Array<{
+    /** ジャンルID */
+    genreId: number
+    /** ジャンル名 */
+    genreName: string
+  }>
+}
+
 /**
  * 商品検索画面
+ * @returns {JSX.Element}
  */
-const SearchProductPage = () => {
+const SearchProductPage = ({ genres }: IProps): JSX.Element => {
   return (
     <div className={rootStyle}>
       {/** サイドナビ */}
@@ -163,31 +174,13 @@ const SearchProductPage = () => {
         <section className="sidebar-genre">
           <h2 className="genre-title-label">ジャンル</h2>
           <ul className="genre-ul">
-            <li className="genre-li">
-              <a className="genre-a">
-                <span className="genre-span">レディースファッション</span>
-              </a>
-            </li>
-            <li className="genre-li">
-              <a className="genre-a">
-                <span className="genre-span">メンズファッション</span>
-              </a>
-            </li>
-            <li className="genre-li">
-              <a className="genre-a">
-                <span className="genre-span">インナー・下着・ナイトウェア</span>
-              </a>
-            </li>
-            <li className="genre-li">
-              <a className="genre-a">
-                <span className="genre-span">靴</span>
-              </a>
-            </li>
-            <li className="genre-li">
-              <a className="genre-a">
-                <span className="genre-span">腕時計</span>
-              </a>
-            </li>
+            {genres.map((genre) => (
+              <li key={genre.genreId} className="genre-li">
+                <a className="genre-a">
+                  <span className="genre-span">{genre.genreName}</span>
+                </a>
+              </li>
+            ))}
           </ul>
         </section>
       </div>
