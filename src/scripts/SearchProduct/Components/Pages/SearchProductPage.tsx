@@ -1,7 +1,7 @@
 import { css } from '@emotion/css'
-import CoffeeMachine from '../../assets/images/CoffeeMachine.jpg'
-import StarRating from '../../Product/Components/Molecules/StarRating'
-import ShopSvg from '../../Cores/Svgs/Icons/ShopSvg'
+import CoffeeMachine from '../../../assets/images/CoffeeMachine.jpg'
+import StarRating from '../../../Product/Components/Molecules/StarRating'
+import ShopSvg from '../../../Cores/Svgs/Icons/ShopSvg'
 
 const rootStyle = css`
   display: flex;

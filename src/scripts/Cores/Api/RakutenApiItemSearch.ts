@@ -2,8 +2,10 @@ import { ICommonResponse } from '../Utils/ApiUtil'
 import Http from '../Utils/RakutenApiUtil'
 
 type IItemSearchRequest = {
+  /** 検索キーワード */
+  keyword?: string
   /** 商品コード */
-  itemCode: string
+  itemCode?: string
 }
 
 export type IItemSearchResponse = ICommonResponse & {
