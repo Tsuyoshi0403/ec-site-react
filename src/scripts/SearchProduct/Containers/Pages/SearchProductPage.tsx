@@ -4,14 +4,17 @@ import RakutenApiGenreSearch, {
   IGenreSearchResponse,
 } from '../../../Cores/Api/RakutenApiGenreSearch'
 import useApiLoading from '../../../Cores/Hooks/useApiLoading'
-import { useLocation, useSearchParams } from 'react-router-dom'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import RakutenApiItemSearch, {
   IItemSearchResponse,
 } from '../../../Cores/Api/RakutenApiItemSearch'
 
 const SearchProductPageContainers = () => {
+  const location = useLocation()
+  const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const keyword = searchParams.get('keyword')
+  const genreId = searchParams.get('genreId')
   const { execApi: execGenreSearchApiGet } = useApiLoading(
     RakutenApiGenreSearch.get
   )
@@ -24,7 +27,9 @@ const SearchProductPageContainers = () => {
   const [productState, setProductState] = useState<
     IItemSearchResponse['Items']
   >([])
-  const location = useLocation()
+  const [selectedGenreIdState, setSelectedGenreIdState] = useState<
+    number | null
+  >(Number(genreId))
 
   useEffect(() => {
     execGenreSearchApiGet({
@@ -43,6 +48,7 @@ const SearchProductPageContainers = () => {
     execItemSearchApiGet({
       request: {
         keyword: keyword,
+        genreId: Number(genreId),
       },
       successCallback: (response) => {
         setProductState(response.Items)
@@ -50,14 +56,31 @@ const SearchProductPageContainers = () => {
     })
   }, [location])
 
+  // ジャンル選択された際の処理
+  const onSelectGenre = (selectedGenreId: number) => {
+    setSelectedGenreIdState((prevId) =>
+      prevId === selectedGenreId ? null : selectedGenreId
+    )
+
+    navigate(
+      `/search/product?keyword=${keyword}${
+        selectedGenreIdState === selectedGenreId
+          ? ''
+          : `&genreId=${selectedGenreId}`
+      }`
+    )
+  }
+
   /* eslint-disable react/no-children-prop */
   return (
     <SearchProductPage
       genres={genresState.map((genres) => ({
         genreId: genres.child.genreId,
         genreName: genres.child.genreName,
+        onSelectGenre: onSelectGenre,
       }))}
       items={productState}
+      selectedGenreIdState={selectedGenreIdState}
     />
   )
 }

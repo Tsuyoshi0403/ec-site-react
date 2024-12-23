@@ -104,6 +104,8 @@ const NewHeader = (): JSX.Element => {
     const keyword = (e.currentTarget.elements as any).keyword.value.trim()
     if (keyword) {
       navigate(`/search/product?keyword=${keyword}`)
+    } else {
+      navigate(`/`)
     }
   }
 

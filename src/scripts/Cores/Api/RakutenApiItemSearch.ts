@@ -6,6 +6,8 @@ type IItemSearchRequest = {
   keyword?: string
   /** 商品コード */
   itemCode?: string
+  /** ジャンルID */
+  genreId?: number
 }
 
 export type IItemSearchResponse = ICommonResponse & {

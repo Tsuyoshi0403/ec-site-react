@@ -62,6 +62,9 @@ const rootStyle = css`
               cursor: pointer;
               color: #62cda2;
             }
+            .selected-genre {
+              color: #62cda2;
+            }
           }
         }
       }
@@ -151,6 +154,8 @@ type IProps = {
     genreId: number
     /** ジャンル名 */
     genreName: string
+    /** ジャンル選択のハンドラー */
+    onSelectGenre: (genreId: number) => void
   }>
   /** 商品検索一覧 */
   items: Array<{
@@ -174,13 +179,19 @@ type IProps = {
       }>
     }
   }>
+  /** 選択中のジャンルID */
+  selectedGenreIdState: number | null
 }
 
 /**
  * 商品検索画面
  * @returns {JSX.Element}
  */
-const SearchProductPage = ({ genres, items }: IProps): JSX.Element => {
+const SearchProductPage = ({
+  genres,
+  items,
+  selectedGenreIdState,
+}: IProps): JSX.Element => {
   return (
     <div className={rootStyle}>
       {/** サイドナビ */}
@@ -198,8 +209,19 @@ const SearchProductPage = ({ genres, items }: IProps): JSX.Element => {
           <ul className="genre-ul">
             {genres.map((genre) => (
               <li key={genre.genreId} className="genre-li">
-                <a className="genre-a">
-                  <span className="genre-span">{genre.genreName}</span>
+                <a
+                  className="genre-a"
+                  onClick={() => genre.onSelectGenre(genre.genreId)}
+                >
+                  <span
+                    className={`genre-span ${
+                      selectedGenreIdState === genre.genreId
+                        ? 'selected-genre'
+                        : ''
+                    }`}
+                  >
+                    {genre.genreName}
+                  </span>
                 </a>
               </li>
             ))}
