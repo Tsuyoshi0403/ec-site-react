@@ -92,6 +92,7 @@ const NewHeader = (): JSX.Element => {
   // クエリパラメータの取得と初期キーワードの設定
   const query = new URLSearchParams(location.search)
   const initKeyword = query.get('keyword') || ''
+  const genreId = query.get('genreId')
   const [keyword, setKeyword] = useState<string>(initKeyword)
 
   /**
@@ -103,7 +104,11 @@ const NewHeader = (): JSX.Element => {
 
     const keyword = (e.currentTarget.elements as any).keyword.value.trim()
     if (keyword) {
-      navigate(`/search/product?keyword=${keyword}`)
+      navigate(
+        `/search/product?keyword=${keyword}${
+          genreId ? `&genreId=${genreId}` : ''
+        }`
+      )
     } else {
       navigate(`/`)
     }

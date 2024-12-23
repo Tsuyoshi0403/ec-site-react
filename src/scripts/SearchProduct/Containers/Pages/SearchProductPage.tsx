@@ -71,6 +71,13 @@ const SearchProductPageContainers = () => {
     )
   }
 
+  // 商品が選択された際の処理
+  const onSelectItem = (itemCode: string) => {
+    navigate(`/product?itemCode=${itemCode}`)
+  }
+
+  if (!productState.length) return <div></div>
+
   /* eslint-disable react/no-children-prop */
   return (
     <SearchProductPage
@@ -81,6 +88,7 @@ const SearchProductPageContainers = () => {
       }))}
       items={productState}
       selectedGenreIdState={selectedGenreIdState}
+      onSelectItem={onSelectItem}
     />
   )
 }

@@ -181,6 +181,8 @@ type IProps = {
   }>
   /** 選択中のジャンルID */
   selectedGenreIdState: number | null
+  /** 商品選択時の処理 */
+  onSelectItem: (itemCode: string) => void
 }
 
 /**
@@ -191,6 +193,7 @@ const SearchProductPage = ({
   genres,
   items,
   selectedGenreIdState,
+  onSelectItem,
 }: IProps): JSX.Element => {
   return (
     <div className={rootStyle}>
@@ -232,7 +235,10 @@ const SearchProductPage = ({
       <div className="search-product-list">
         {items.map((item, index) => (
           <div key={`${item.Item.itemCode}-${index}`} className="product">
-            <a className="product-a">
+            <a
+              className="product-a"
+              onClick={() => onSelectItem(item.Item.itemCode)}
+            >
               <img
                 className="product-img"
                 src={
