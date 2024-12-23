@@ -30,6 +30,7 @@ const SearchProductPageContainers = () => {
   const [selectedGenreIdState, setSelectedGenreIdState] = useState<
     number | null
   >(Number(genreId))
+  const [totalCount, setTotalCount] = useState<number>(0)
 
   useEffect(() => {
     execGenreSearchApiGet({
@@ -52,6 +53,7 @@ const SearchProductPageContainers = () => {
       },
       successCallback: (response) => {
         setProductState(response.Items)
+        setTotalCount(response.count)
       },
     })
   }, [location])
@@ -87,6 +89,7 @@ const SearchProductPageContainers = () => {
         onSelectGenre: onSelectGenre,
       }))}
       items={productState}
+      totalCount={totalCount}
       selectedGenreIdState={selectedGenreIdState}
       onSelectItem={onSelectItem}
     />

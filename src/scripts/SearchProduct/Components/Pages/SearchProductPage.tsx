@@ -179,6 +179,8 @@ type IProps = {
       }>
     }
   }>
+  /** 合計商品数 */
+  totalCount: number
   /** 選択中のジャンルID */
   selectedGenreIdState: number | null
   /** 商品選択時の処理 */
@@ -192,6 +194,7 @@ type IProps = {
 const SearchProductPage = ({
   genres,
   items,
+  totalCount,
   selectedGenreIdState,
   onSelectItem,
 }: IProps): JSX.Element => {
@@ -203,7 +206,8 @@ const SearchProductPage = ({
           <div className="sidebar-products-number">
             <span className="products-label">対象商品</span>
             <span className="products-number-label">
-              695,487<span className="number-label">件</span>
+              {new Intl.NumberFormat().format(totalCount)}
+              <span className="number-label">件</span>
             </span>
           </div>
         </div>

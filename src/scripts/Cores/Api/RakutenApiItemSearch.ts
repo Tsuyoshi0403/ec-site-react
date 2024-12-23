@@ -35,6 +35,8 @@ export type IItemSearchResponse = ICommonResponse & {
       }>
     }
   }>
+  /** 合計商品数 */
+  count: number
 }
 
 /**
