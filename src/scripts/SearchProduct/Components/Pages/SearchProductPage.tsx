@@ -1,5 +1,4 @@
 import { css } from '@emotion/css'
-import CoffeeMachine from '../../../assets/images/CoffeeMachine.jpg'
 import StarRating from '../../../Product/Components/Molecules/StarRating'
 import ShopSvg from '../../../Cores/Svgs/Icons/ShopSvg'
 
@@ -89,7 +88,8 @@ const rootStyle = css`
       .product-a {
         display: flex;
         justify-content: center;
-        width: 100%;
+        width: 200px;
+        height: 200px;
         .product-img {
           max-width: 100%;
           max-height: 100%;
@@ -152,13 +152,35 @@ type IProps = {
     /** ジャンル名 */
     genreName: string
   }>
+  /** 商品検索一覧 */
+  items: Array<{
+    Item: {
+      /** 商品名 */
+      itemName: string
+      /** 商品価格 */
+      itemPrice: number
+      /** 星評価 */
+      reviewAverage: number
+      /** 販売ショップ */
+      shopName: string
+      /** 商品コード */
+      itemCode: string
+      /** 送料区分 */
+      postageFlag: number
+      /** 商品画像URL一覧 */
+      mediumImageUrls: Array<{
+        /** 商品画像URL */
+        imageUrl: string
+      }>
+    }
+  }>
 }
 
 /**
  * 商品検索画面
  * @returns {JSX.Element}
  */
-const SearchProductPage = ({ genres }: IProps): JSX.Element => {
+const SearchProductPage = ({ genres, items }: IProps): JSX.Element => {
   return (
     <div className={rootStyle}>
       {/** サイドナビ */}
@@ -186,282 +208,41 @@ const SearchProductPage = ({ genres }: IProps): JSX.Element => {
       </div>
       {/** 検索商品一覧 */}
       <div className="search-product-list">
-        {/** 検索商品 */}
-        <div className="product">
-          <a className="product-a">
-            <img className="product-img" src={CoffeeMachine}></img>
-          </a>
+        {items.map((item, index) => (
+          <div key={`${item.Item.itemCode}-${index}`} className="product">
+            <a className="product-a">
+              <img
+                className="product-img"
+                src={
+                  item.Item.mediumImageUrls[0]
+                    ? item.Item.mediumImageUrls[0].imageUrl.replace(
+                        /\?_ex=\d+x\d+$/,
+                        ''
+                      )
+                    : ''
+                }
+                alt="検索商品"
+              ></img>
+            </a>
 
-          <h2 className="product-title">
-            [PR] 【日本正規公式品】NEWモデル 日本正規公式
-            モルック【リピーターの方はレビ
-          </h2>
-          <div className="product-price-wrapper">
-            <div className="product-price">
-              1,969<span className="product-yen">円</span>
+            <h2 className="product-title">{item.Item.itemName}</h2>
+            <div className="product-price-wrapper">
+              <div className="product-price">
+                {new Intl.NumberFormat().format(item.Item.itemPrice)}
+                <span className="product-yen">円</span>
+              </div>
+              {item.Item.postageFlag === 1 && (
+                <span className="free-shipping">送料無料</span>
+              )}
             </div>
-            <span className="free-shipping">送料無料</span>
-          </div>
 
-          <StarRating className="star-area" score={4} />
-          <div className="shop-area">
-            <ShopSvg />
-            <span className="shop-name">ダイレクトショップ</span>
-          </div>
-        </div>
-        {/** 検索商品 */}
-        <div className="product">
-          <a className="product-a">
-            <img className="product-img" src={CoffeeMachine}></img>
-          </a>
-
-          <h2 className="product-title">
-            [PR] 【日本正規公式品】NEWモデル 日本正規公式
-            モルック【リピーターの方はレビ
-          </h2>
-          <div className="product-price-wrapper">
-            <div className="product-price">
-              1,969<span className="product-yen">円</span>
+            <StarRating className="star-area" score={item.Item.reviewAverage} />
+            <div className="shop-area">
+              <ShopSvg />
+              <span className="shop-name">{item.Item.shopName}</span>
             </div>
-            <span className="free-shipping">送料無料</span>
           </div>
-
-          <StarRating className="star-area" score={4} />
-          <div className="shop-area">
-            <ShopSvg />
-            <span className="shop-name">ダイレクトショップ</span>
-          </div>
-        </div>
-        {/** 検索商品 */}
-        <div className="product">
-          <a className="product-a">
-            <img className="product-img" src={CoffeeMachine}></img>
-          </a>
-
-          <h2 className="product-title">
-            [PR] 【日本正規公式品】NEWモデル 日本正規公式
-            モルック【リピーターの方はレビ
-          </h2>
-          <div className="product-price-wrapper">
-            <div className="product-price">
-              1,969<span className="product-yen">円</span>
-            </div>
-            <span className="free-shipping">送料無料</span>
-          </div>
-
-          <StarRating className="star-area" score={4} />
-          <div className="shop-area">
-            <ShopSvg />
-            <span className="shop-name">ダイレクトショップ</span>
-          </div>
-        </div>
-        {/** 検索商品 */}
-        <div className="product">
-          <a className="product-a">
-            <img className="product-img" src={CoffeeMachine}></img>
-          </a>
-
-          <h2 className="product-title">
-            [PR] 【日本正規公式品】NEWモデル 日本正規公式
-            モルック【リピーターの方はレビ
-          </h2>
-          <div className="product-price-wrapper">
-            <div className="product-price">
-              1,969<span className="product-yen">円</span>
-            </div>
-            <span className="free-shipping">送料無料</span>
-          </div>
-
-          <StarRating className="star-area" score={4} />
-          <div className="shop-area">
-            <ShopSvg />
-            <span className="shop-name">ダイレクトショップ</span>
-          </div>
-        </div>
-        {/** 検索商品 */}
-        <div className="product">
-          <a className="product-a">
-            <img className="product-img" src={CoffeeMachine}></img>
-          </a>
-
-          <h2 className="product-title">
-            [PR] 【日本正規公式品】NEWモデル 日本正規公式
-            モルック【リピーターの方はレビ
-          </h2>
-          <div className="product-price-wrapper">
-            <div className="product-price">
-              1,969<span className="product-yen">円</span>
-            </div>
-            <span className="free-shipping">送料無料</span>
-          </div>
-
-          <StarRating className="star-area" score={4} />
-          <div className="shop-area">
-            <ShopSvg />
-            <span className="shop-name">ダイレクトショップ</span>
-          </div>
-        </div>
-        {/** 検索商品 */}
-        <div className="product">
-          <a className="product-a">
-            <img className="product-img" src={CoffeeMachine}></img>
-          </a>
-
-          <h2 className="product-title">
-            [PR] 【日本正規公式品】NEWモデル 日本正規公式
-            モルック【リピーターの方はレビ
-          </h2>
-          <div className="product-price-wrapper">
-            <div className="product-price">
-              1,969<span className="product-yen">円</span>
-            </div>
-            <span className="free-shipping">送料無料</span>
-          </div>
-
-          <StarRating className="star-area" score={4} />
-          <div className="shop-area">
-            <ShopSvg />
-            <span className="shop-name">ダイレクトショップ</span>
-          </div>
-        </div>
-        {/** 検索商品 */}
-        <div className="product">
-          <a className="product-a">
-            <img className="product-img" src={CoffeeMachine}></img>
-          </a>
-
-          <h2 className="product-title">
-            [PR] 【日本正規公式品】NEWモデル 日本正規公式
-            モルック【リピーターの方はレビ
-          </h2>
-          <div className="product-price-wrapper">
-            <div className="product-price">
-              1,969<span className="product-yen">円</span>
-            </div>
-            <span className="free-shipping">送料無料</span>
-          </div>
-
-          <StarRating className="star-area" score={4} />
-          <div className="shop-area">
-            <ShopSvg />
-            <span className="shop-name">ダイレクトショップ</span>
-          </div>
-        </div>
-        {/** 検索商品 */}
-        <div className="product">
-          <a className="product-a">
-            <img className="product-img" src={CoffeeMachine}></img>
-          </a>
-
-          <h2 className="product-title">
-            [PR] 【日本正規公式品】NEWモデル 日本正規公式
-            モルック【リピーターの方はレビ
-          </h2>
-          <div className="product-price-wrapper">
-            <div className="product-price">
-              1,969<span className="product-yen">円</span>
-            </div>
-            <span className="free-shipping">送料無料</span>
-          </div>
-
-          <StarRating className="star-area" score={4} />
-          <div className="shop-area">
-            <ShopSvg />
-            <span className="shop-name">ダイレクトショップ</span>
-          </div>
-        </div>
-        {/** 検索商品 */}
-        <div className="product">
-          <a className="product-a">
-            <img className="product-img" src={CoffeeMachine}></img>
-          </a>
-
-          <h2 className="product-title">
-            [PR] 【日本正規公式品】NEWモデル 日本正規公式
-            モルック【リピーターの方はレビ
-          </h2>
-          <div className="product-price-wrapper">
-            <div className="product-price">
-              1,969<span className="product-yen">円</span>
-            </div>
-            <span className="free-shipping">送料無料</span>
-          </div>
-
-          <StarRating className="star-area" score={4} />
-          <div className="shop-area">
-            <ShopSvg />
-            <span className="shop-name">ダイレクトショップ</span>
-          </div>
-        </div>
-        {/** 検索商品 */}
-        <div className="product">
-          <a className="product-a">
-            <img className="product-img" src={CoffeeMachine}></img>
-          </a>
-
-          <h2 className="product-title">
-            [PR] 【日本正規公式品】NEWモデル 日本正規公式
-            モルック【リピーターの方はレビ
-          </h2>
-          <div className="product-price-wrapper">
-            <div className="product-price">
-              1,969<span className="product-yen">円</span>
-            </div>
-            <span className="free-shipping">送料無料</span>
-          </div>
-
-          <StarRating className="star-area" score={4} />
-          <div className="shop-area">
-            <ShopSvg />
-            <span className="shop-name">ダイレクトショップ</span>
-          </div>
-        </div>
-        {/** 検索商品 */}
-        <div className="product">
-          <a className="product-a">
-            <img className="product-img" src={CoffeeMachine}></img>
-          </a>
-
-          <h2 className="product-title">
-            [PR] 【日本正規公式品】NEWモデル 日本正規公式
-            モルック【リピーターの方はレビ
-          </h2>
-          <div className="product-price-wrapper">
-            <div className="product-price">
-              1,969<span className="product-yen">円</span>
-            </div>
-            <span className="free-shipping">送料無料</span>
-          </div>
-
-          <StarRating className="star-area" score={4} />
-          <div className="shop-area">
-            <ShopSvg />
-            <span className="shop-name">ダイレクトショップ</span>
-          </div>
-        </div>
-        {/** 検索商品 */}
-        <div className="product">
-          <a className="product-a">
-            <img className="product-img" src={CoffeeMachine}></img>
-          </a>
-
-          <h2 className="product-title">
-            [PR] 【日本正規公式品】NEWモデル 日本正規公式
-            モルック【リピーターの方はレビ
-          </h2>
-          <div className="product-price-wrapper">
-            <div className="product-price">
-              1,969<span className="product-yen">円</span>
-            </div>
-            <span className="free-shipping">送料無料</span>
-          </div>
-
-          <StarRating className="star-area" score={4} />
-          <div className="shop-area">
-            <ShopSvg />
-            <span className="shop-name">ダイレクトショップ</span>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   )

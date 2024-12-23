@@ -3,7 +3,7 @@ import MainPageContainers from '../../../Main/Containers/Page/MainPage'
 import NewHeader from '../Organisms/NewHeader'
 import ProductPageContainers from '../../../Product/Containers/Pages/ProductPage'
 import { css } from '@emotion/css'
-import SearchProductPageContainers from '../../../SearchProduct/Containers/Pages/SearchProductPageContainers'
+import SearchProductPageContainers from '../../../SearchProduct/Containers/Pages/SearchProductPage'
 
 const mainStyle = css`
   display: flex;
