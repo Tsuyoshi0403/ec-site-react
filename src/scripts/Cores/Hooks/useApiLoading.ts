@@ -54,8 +54,7 @@ export const useApiLoading = <Request, Response extends ICommonResponse>(
     }
     try {
       if (JWTUtil.existsToken() && JWTUtil.checkTokenExpired()) {
-        // TODO: 安田 refreshAPI実装が完了後、API繋ぎ込みをする
-        // await ApiRefresh.post()
+        await ApiRefresh.post()
       }
 
       const response = await apiFunc(request)
