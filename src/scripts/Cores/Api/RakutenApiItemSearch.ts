@@ -2,8 +2,12 @@ import { ICommonResponse } from '../Utils/ApiUtil'
 import Http from '../Utils/RakutenApiUtil'
 
 type IItemSearchRequest = {
+  /** 検索キーワード */
+  keyword?: string
   /** 商品コード */
-  itemCode: string
+  itemCode?: string
+  /** ジャンルID */
+  genreId?: number
 }
 
 export type IItemSearchResponse = ICommonResponse & {
@@ -31,6 +35,8 @@ export type IItemSearchResponse = ICommonResponse & {
       }>
     }
   }>
+  /** 合計商品数 */
+  count: number
 }
 
 /**

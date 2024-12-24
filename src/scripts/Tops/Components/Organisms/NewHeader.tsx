@@ -5,6 +5,8 @@ import FavoriteSvg from '../../../Cores/Svgs/Icons/FavoriteSvg'
 import PurchaseHistorySvg from '../../../Cores/Svgs/Icons/PurchaseHistorySvg'
 import BrowsingHistorySvg from '../../../Cores/Svgs/Icons/BrowsingHistorySvg'
 import MyPageSvg from '../../../Cores/Svgs/Icons/MyPageSvg'
+import { useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const rootStyle = css`
   .header-area {
@@ -84,12 +86,54 @@ const rootStyle = css`
  * @returns {JSX.Element}
  */
 const NewHeader = (): JSX.Element => {
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  // クエリパラメータの取得と初期キーワードの設定
+  const query = new URLSearchParams(location.search)
+  const initKeyword = query.get('keyword') || ''
+  const genreId = query.get('genreId')
+  const [keyword, setKeyword] = useState<string>(initKeyword)
+
+  /**
+   * 商品検索を実行する
+   * @param e - フォーム送信イベント
+   */
+  const onSearchProduct = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    const keyword = (e.currentTarget.elements as any).keyword.value.trim()
+    if (keyword) {
+      navigate(
+        `/search/product?keyword=${keyword}${
+          genreId ? `&genreId=${genreId}` : ''
+        }`
+      )
+    } else {
+      navigate(`/`)
+    }
+  }
+
+  /**
+   * 検索キーワードの変更を処理
+   * @param e - 入力フィールドの変更イベント
+   */
+  const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setKeyword(e.target.value)
+  }
+
   return (
     <div className={rootStyle}>
       <header className="header-area">
         <h1 className="header-title">オンラインショッピング</h1>
-        <form className="header-bar">
-          <input className="search-input" placeholder="キーワードで検索" />
+        <form className="header-bar" onSubmit={onSearchProduct}>
+          <input
+            className="search-input"
+            name="keyword"
+            value={keyword}
+            onChange={onSearchChange}
+            placeholder="キーワードで検索"
+          />
           <button className="search-btn">
             <SearchIcon sx={{ color: 'white' }} />
           </button>

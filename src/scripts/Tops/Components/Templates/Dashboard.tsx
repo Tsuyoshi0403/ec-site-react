@@ -3,7 +3,7 @@ import MainPageContainers from '../../../Main/Containers/Page/MainPage'
 import NewHeader from '../Organisms/NewHeader'
 import ProductPageContainers from '../../../Product/Containers/Pages/ProductPage'
 import { css } from '@emotion/css'
-import SearchProductPage from '../../../SearchProduct/Components/SearchProductPage'
+import SearchProductPageContainers from '../../../SearchProduct/Containers/Pages/SearchProductPage'
 
 const mainStyle = css`
   display: flex;
@@ -29,7 +29,10 @@ export default function Dashboard(): JSX.Element {
         <Routes>
           <Route path="/" element={<MainPageContainers />} />
           <Route path="/product" element={<ProductPageContainers />} />
-          <Route path="/search/product" element={<SearchProductPage />} />
+          <Route
+            path="/search/product"
+            element={<SearchProductPageContainers />}
+          />
         </Routes>
       </div>
     </div>
