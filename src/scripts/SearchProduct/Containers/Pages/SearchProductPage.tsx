@@ -9,7 +9,12 @@ import RakutenApiItemSearch, {
   IItemSearchResponse,
 } from '../../../Cores/Api/RakutenApiItemSearch'
 
-const SearchProductPageContainers = () => {
+/**
+ * 商品検索画面コンテナ
+ * @returns {JSX.Element}
+ */
+
+const SearchProductPageContainers = (): JSX.Element => {
   const location = useLocation()
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
@@ -33,6 +38,7 @@ const SearchProductPageContainers = () => {
   const [totalCount, setTotalCount] = useState<number>(0)
 
   useEffect(() => {
+    // ジャンル検索APIを実行して、ジャンルリストを取得する
     execGenreSearchApiGet({
       request: {
         genreId: 0,
@@ -44,6 +50,7 @@ const SearchProductPageContainers = () => {
   }, [])
 
   useEffect(() => {
+    // キーワードが存在する場合、商品検索APIを実行する
     if (!keyword) return
 
     execItemSearchApiGet({
@@ -58,7 +65,10 @@ const SearchProductPageContainers = () => {
     })
   }, [location])
 
-  // ジャンル選択された際の処理
+  /**
+   * ジャンル選択時の処理
+   * @param selectedGenreId - 選択したジャンルID
+   */
   const onSelectGenre = (selectedGenreId: number) => {
     setSelectedGenreIdState((prevId) =>
       prevId === selectedGenreId ? null : selectedGenreId
@@ -73,7 +83,10 @@ const SearchProductPageContainers = () => {
     )
   }
 
-  // 商品が選択された際の処理
+  /**
+   * 商品選択時の処理
+   * @param itemCode - 選択した商品コード
+   */
   const onSelectItem = (itemCode: string) => {
     navigate(`/product?itemCode=${itemCode}`)
   }
