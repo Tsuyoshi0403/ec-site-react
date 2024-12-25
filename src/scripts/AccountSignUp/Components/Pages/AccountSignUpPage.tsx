@@ -1,4 +1,5 @@
 import { css } from '@emotion/css'
+import { useState } from 'react'
 
 const rootStyle = css`
   display: flex;
@@ -95,11 +96,46 @@ const rootStyle = css`
     }
   }
 `
+
+type FocusedInputsState = {
+  storeName: boolean
+  lastName: boolean
+  firstName: boolean
+  phoneNumber: boolean
+  email: boolean
+  password: boolean
+  confirmPassword: boolean
+}
+
+// 初期値
+const initFocusedInputState: FocusedInputsState = {
+  storeName: false,
+  lastName: false,
+  firstName: false,
+  phoneNumber: false,
+  email: false,
+  password: false,
+  confirmPassword: false,
+}
+
 /**
  * アカウント作成画面
  * @returns {JSX.Element}
  */
 const AccountSignUpPage = (): JSX.Element => {
+  const [focusedInput, setFocusedInput] = useState<FocusedInputsState>(
+    initFocusedInputState
+  )
+
+  /**
+   * フォーカス状態の更新
+   * @param {string} key - 更新対象のキー
+   * @param {boolean} isFocused - フォーカス状態
+   */
+  const handleFocus = (key: string, isFocused: boolean) => {
+    setFocusedInput((prev) => ({ ...prev, [key]: isFocused }))
+  }
+
   return (
     <div className={rootStyle}>
       <article className="sign-up-card">
@@ -108,39 +144,82 @@ const AccountSignUpPage = (): JSX.Element => {
         </div>
         <form className="sign-up-from-area">
           <div className="sign-up-input-area">
-            <label className="sign-up-label">店舗名（必須）</label>
-            <input className="sign-up-input" placeholder="店舗名（必須）" />
+            {focusedInput.storeName && (
+              <label className="sign-up-label">店舗名（必須）</label>
+            )}
+            <input
+              className="sign-up-input"
+              placeholder="店舗名（必須）"
+              onFocus={() => handleFocus('storeName', true)}
+              onBlur={() => handleFocus('storeName', false)}
+            />
           </div>
           <div className="sign-up-name-area">
             <div className="sign-up-input-area">
-              <label className="sign-up-label">姓（必須）</label>
-              <input className="sign-up-input" placeholder="姓（必須）" />
+              {focusedInput.lastName && (
+                <label className="sign-up-label">姓（必須）</label>
+              )}
+              <input
+                className="sign-up-input"
+                placeholder="姓（必須）"
+                onFocus={() => handleFocus('lastName', true)}
+                onBlur={() => handleFocus('lastName', false)}
+              />
             </div>
             <div className="sign-up-input-area">
-              <label className="sign-up-label">名（必須）</label>
-              <input className="sign-up-input" placeholder="名（必須）" />
+              {focusedInput.firstName && (
+                <label className="sign-up-label">名（必須）</label>
+              )}
+              <input
+                className="sign-up-input"
+                placeholder="名（必須）"
+                onFocus={() => handleFocus('firstName', true)}
+                onBlur={() => handleFocus('firstName', false)}
+              />
             </div>
           </div>
           <div className="sign-up-input-area">
-            <label className="sign-up-label">電話番号</label>
-            <input className="sign-up-input" placeholder="電話番号" />
-          </div>
-          <div className="sign-up-input-area">
-            <label className="sign-up-label">メールアドレス（必須）</label>
+            {focusedInput.phoneNumber && (
+              <label className="sign-up-label">電話番号</label>
+            )}
             <input
               className="sign-up-input"
-              placeholder="メールアドレス（必須）"
+              placeholder="電話番号"
+              onFocus={() => handleFocus('phoneNumber', true)}
+              onBlur={() => handleFocus('phoneNumber', false)}
             />
           </div>
           <div className="sign-up-input-area">
-            <label className="sign-up-label">パスワード（必須）</label>
-            <input className="sign-up-input" placeholder="パスワード（必須）" />
+            {focusedInput.email && (
+              <label className="sign-up-label">メールアドレス（必須）</label>
+            )}
+            <input
+              className="sign-up-input"
+              placeholder="メールアドレス（必須）"
+              onFocus={() => handleFocus('email', true)}
+              onBlur={() => handleFocus('email', false)}
+            />
           </div>
           <div className="sign-up-input-area">
-            <label className="sign-up-label">パスワード再入力（必須）</label>
+            {focusedInput.password && (
+              <label className="sign-up-label">パスワード（必須）</label>
+            )}
+            <input
+              className="sign-up-input"
+              placeholder="パスワード（必須）"
+              onFocus={() => handleFocus('password', true)}
+              onBlur={() => handleFocus('password', false)}
+            />
+          </div>
+          <div className="sign-up-input-area">
+            {focusedInput.confirmPassword && (
+              <label className="sign-up-label">パスワード再入力（必須）</label>
+            )}
             <input
               className="sign-up-input"
               placeholder="パスワード再入力（必須）"
+              onFocus={() => handleFocus('confirmPassword', true)}
+              onBlur={() => handleFocus('confirmPassword', false)}
             />
           </div>
           <div className="sign-up-btn-area">
