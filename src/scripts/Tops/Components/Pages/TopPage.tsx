@@ -5,7 +5,7 @@ import Loading from '../../../Cores/Components/Organisms/Loading'
 import NewLoginPageContainers from '../../Containers/Pages/NewLoginPage'
 import AuthRoute from './AuthRoute'
 import Notification from '../../../Cores/Components/Atoms/Notification'
-import AccountSignUpPage from '../../../AccountSignUp/Components/Pages/AccountSignUpPage'
+import AccountSignUpPageContainers from '../../../AccountSignUp/Containers/Pages/AccountSignUpPage'
 
 /**
  * Topコンポーネント
@@ -19,7 +19,7 @@ const TopPage = (): JSX.Element => {
         {/** 未ログイン時はログインページにリダイレクト、ログイン済みはメインページを表示 */}
         <Route path="/*" element={<AuthRoute path="/*" />} />
         <Route path="/login" element={<NewLoginPageContainers />} />
-        <Route path="/sign-up" element={<AccountSignUpPage />} />
+        <Route path="/sign-up" element={<AccountSignUpPageContainers />} />
       </Routes>
       <Loading open={isLoading} />
       <Notification />
