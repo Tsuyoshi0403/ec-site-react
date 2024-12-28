@@ -77,16 +77,21 @@ const rootStyle = css`
         }
       }
     }
-    .forgot-password-btn-area {
+    .sign-up-btn-area {
       margin: 60px 25px 90px;
       display: flex;
       flex-direction: column;
-      .forgot-password-btn {
+      .sign-up-btn {
         color: #469fd6;
         font-size: 12px;
         font-weight: 700;
         background: transparent;
         border: 0;
+        &:hover {
+          color: #5ab3e1;
+          text-decoration: underline;
+          cursor: pointer;
+        }
       }
     }
   }
@@ -188,9 +193,15 @@ const NewLoginPage = (props: IProps): JSX.Element => {
             </button>
           </div>
         </form>
-        <div className="forgot-password-btn-area">
-          <button className="forgot-password-btn" type="button">
-            ログインID/パスワードを忘れた方
+        <div className="sign-up-btn-area">
+          <button
+            className="sign-up-btn"
+            type="button"
+            onClick={() =>
+              (location.href = process.env.REACT_APP_SIGN_UP_URL + '/sign-up')
+            }
+          >
+            アカウント作成はこちら
           </button>
         </div>
       </article>
