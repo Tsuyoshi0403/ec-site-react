@@ -90,6 +90,11 @@ const rootStyle = css`
         font-weight: 700;
         background: transparent;
         border: 0;
+        &:hover {
+          color: #5ab3e1;
+          text-decoration: underline;
+          cursor: pointer;
+        }
       }
     }
   }
@@ -246,8 +251,8 @@ const AccountSignUpPage = (props: IProps): JSX.Element => {
               type="password"
               value={props.account.confirmPass}
               onChange={props.onChange('confirmPass')}
-              onFocus={() => handleFocus('confirmPassword', true)}
-              onBlur={() => handleFocus('confirmPassword', false)}
+              onFocus={() => handleFocus('confirmPass', true)}
+              onBlur={() => handleFocus('confirmPass', false)}
             />
           </div>
           <div className="sign-up-btn-area">
@@ -255,7 +260,13 @@ const AccountSignUpPage = (props: IProps): JSX.Element => {
           </div>
         </form>
         <div className="login-btn-area">
-          <button className="login-btn" type="button">
+          <button
+            className="login-btn"
+            type="button"
+            onClick={() =>
+              (location.href = process.env.REACT_APP_WEB_URL + '/login')
+            }
+          >
             すでにアカウントをお持ちの方はログイン
           </button>
         </div>
