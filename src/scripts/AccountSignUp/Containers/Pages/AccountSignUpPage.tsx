@@ -6,6 +6,7 @@ import { IAccount, InitAccount } from '../../../Cores/Types/Account'
 import StringUtil from '../../../Cores/Utils/StringUtil'
 import { useNavigate } from 'react-router-dom'
 import useNotification from '../../../Cores/Hooks/useNotification'
+import AccountCheckMailPage from '../../Components/Pages/AccountCheckMailPage'
 
 /**
  *  アカウント作成コンテナ
@@ -16,6 +17,7 @@ const AccountSignUpPageContainers = (): JSX.Element => {
   const { showWarnNotification } = useNotification()
   const { execApi: execApiPost } = useApiLoading(ApiAccountSignUp.post)
   const [account, setAccount] = useState<IAccount>(InitAccount)
+  const [isSuccess, setSuccess] = useState(false)
 
   // 初回レンダリング時のURLチェック
   useEffect(() => {
@@ -61,17 +63,24 @@ const AccountSignUpPageContainers = (): JSX.Element => {
         pass: account.pass,
       },
       successCallback: () => {
+        setSuccess(true)
         navigate('/sign-up/check-mail')
       },
     })
   }
 
   return (
-    <AccountSignUpPage
-      account={account}
-      onClickCreate={onClickCreate}
-      onChange={onChange}
-    />
+    <>
+      {isSuccess ? (
+        <AccountCheckMailPage mail={account.mail} />
+      ) : (
+        <AccountSignUpPage
+          account={account}
+          onClickCreate={onClickCreate}
+          onChange={onChange}
+        />
+      )}
+    </>
   )
 }
 
