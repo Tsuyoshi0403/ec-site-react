@@ -20,6 +20,10 @@ const TopPage = (): JSX.Element => {
         <Route path="/*" element={<AuthRoute path="/*" />} />
         <Route path="/login" element={<NewLoginPageContainers />} />
         <Route path="/sign-up" element={<AccountSignUpPageContainers />} />
+        <Route
+          path="/sign-up/check-mail"
+          element={<AccountSignUpPageContainers />}
+        />
       </Routes>
       <Loading open={isLoading} />
       <Notification />
