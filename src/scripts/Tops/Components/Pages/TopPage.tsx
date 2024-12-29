@@ -6,6 +6,7 @@ import NewLoginPageContainers from '../../Containers/Pages/NewLoginPage'
 import AuthRoute from './AuthRoute'
 import Notification from '../../../Cores/Components/Atoms/Notification'
 import AccountSignUpPageContainers from '../../../AccountSignUp/Containers/Pages/AccountSignUpPage'
+import AccountVerifyPage from '../../../AccountVerify/Components/Pages/AccountVerifyPage'
 
 /**
  * Topコンポーネント
@@ -23,6 +24,10 @@ const TopPage = (): JSX.Element => {
         <Route
           path="/sign-up/check-mail"
           element={<AccountSignUpPageContainers />}
+        />
+        <Route
+          path="/account-verify/:token"
+          element={<AccountVerifyPage successType="success" />}
         />
       </Routes>
       <Loading open={isLoading} />
