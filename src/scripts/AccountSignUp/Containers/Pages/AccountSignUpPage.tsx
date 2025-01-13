@@ -9,7 +9,7 @@ import useNotification from '../../../Cores/Hooks/useNotification'
 import AccountCheckMailPage from '../../Components/Pages/AccountCheckMailPage'
 
 /**
- *  アカウント作成コンテナ
+ * アカウント作成コンテナ
  * @returns {JSX.Element}
  */
 const AccountSignUpPageContainers = (): JSX.Element => {
