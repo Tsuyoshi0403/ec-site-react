@@ -1,6 +1,7 @@
 import { css } from '@emotion/css'
 import AuthenticationSuccessSvg from '../../../Cores/Svgs/Icons/AuthenticationSuccessSvg'
 import AuthenticationFailedSvg from '../../../Cores/Svgs/Icons/AuthenticationFailedSvg'
+import { successType } from '../../Containers/AccountVerifyPage'
 
 const rootStyle = css`
   display: flex;
@@ -49,10 +50,8 @@ const rootStyle = css`
   }
 `
 
-type successType = 'loading' | 'success' | 'failed'
-
 type IProps = {
-  /**  */
+  /** 認証状態 */
   successType: successType
 }
 
@@ -78,7 +77,13 @@ const AccountVerifyPage = ({ successType }: IProps): JSX.Element => {
             <hr />
             <p className="account-verify-txt">早速ログインしてみましょう</p>
             <div className="login-btn-link-area">
-              <button className="login-btn-link" type="button">
+              <button
+                className="login-btn-link"
+                type="button"
+                onClick={() =>
+                  (location.href = process.env.REACT_APP_WEB_URL + '/login')
+                }
+              >
                 ログイン画面はこちら
               </button>
             </div>
@@ -94,7 +99,13 @@ const AccountVerifyPage = ({ successType }: IProps): JSX.Element => {
             </p>
             <hr />
             <div className="login-btn-link-area">
-              <button className="login-btn-link" type="button">
+              <button
+                className="login-btn-link"
+                type="button"
+                onClick={() =>
+                  (location.href = process.env.REACT_APP_WEB_URL + '/login')
+                }
+              >
                 ログイン画面はこちら
               </button>
             </div>
