@@ -1,14 +1,31 @@
 import { css } from '@emotion/css'
 import * as React from 'react'
+import classNames from 'classnames'
 
 const rootStyle = css`
-  margin: 0px;
-  input {
-    width: 250px;
-    height: 20px;
-    border: #585858 solid 2px;
-    padding: 5px 25px 5px 5px;
-    transition: 0.3s;
+  .login-input-text {
+    border: 0px;
+    font-size: 17px;
+    border-bottom: 2px solid #dfe5ec;
+    padding-bottom: 5px;
+    width: 100%;
+
+    &::placeholder {
+      color: #dfe5ec;
+      font-weight: bold;
+      font-size: 17px;
+    }
+    &:focus::placeholder {
+      opacity: 0;
+    }
+    /* フォーカス時の枠線を非表示にする */
+    &:focus {
+      outline: none;
+      border-bottom-color: #62cda2;
+    }
+    &.input-error {
+      border-bottom-color: #eb5a46;
+    }
   }
 `
 
@@ -16,27 +33,24 @@ type ICommonInputProps = React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
 > & {
-  /** 変更時コールバック */
-  onChangeValue?: (value: string | number) => void
+  /** エラーフラグ */
+  error?: boolean
 }
 
 /**
- * 共通1行インプットエリア
+ * 共通inputタグ
+ * @param props
  */
 const CommonInput = (props: ICommonInputProps): JSX.Element => {
-  const { type, onChangeValue, ...otherProps } = props
-  const isPassword = type === 'password'
-
-  const onChange = (e: React.FocusEvent<HTMLInputElement>) => {
-    onChangeValue && onChangeValue(e.target.value)
-  }
+  const { ...otherProps } = props
 
   return (
     <p className={rootStyle}>
       <input
+        className={classNames('login-input-text', {
+          'input-error': props.error,
+        })}
         {...otherProps}
-        type={isPassword ? 'password' : type}
-        onChange={onChange}
       />
     </p>
   )
