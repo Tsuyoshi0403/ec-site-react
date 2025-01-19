@@ -1,5 +1,7 @@
 import { css } from '@emotion/css'
 import CheckMailSvg from '../../../Cores/Svgs/Icons/CheckMailSvg'
+import CommonH2 from '../../../Cores/Components/Atoms/CommonH2'
+import CommonLink from '../../../Cores/Components/Atoms/CommonLink'
 
 const rootStyle = css`
   display: flex;
@@ -14,7 +16,6 @@ const rootStyle = css`
     margin-bottom: 50px;
     .check-mail-title {
       font-size: 35px;
-      color: #62cda2;
     }
   }
   .check-mail-card {
@@ -36,18 +37,6 @@ const rootStyle = css`
     .login-btn-link-area {
       margin: 50px 0;
       text-align: center;
-      .login-btn-link {
-        color: #469fd6;
-        font-size: 12px;
-        font-weight: 700;
-        background: transparent;
-        border: 0;
-        &:hover {
-          color: #5ab3e1;
-          text-decoration: underline;
-          cursor: pointer;
-        }
-      }
     }
   }
 `
@@ -65,7 +54,10 @@ const AccountCheckMailPage = ({ mail }: IProps): JSX.Element => {
   return (
     <div className={rootStyle}>
       <div className="check-mail-title-area">
-        <h1 className="check-mail-title">認証用メールを送信しました</h1>
+        <CommonH2
+          className="check-mail-title"
+          label="認証用メールを送信しました"
+        />
       </div>
       <article className="check-mail-card">
         <div className="check-mail-svg-area">
@@ -87,15 +79,9 @@ const AccountCheckMailPage = ({ mail }: IProps): JSX.Element => {
           およびスパムフォルダをご確認ください。
         </p>
         <div className="login-btn-link-area">
-          <button
-            className="login-btn-link"
-            type="button"
-            onClick={() =>
-              (location.href = process.env.REACT_APP_WEB_URL + '/login')
-            }
-          >
+          <CommonLink href={process.env.REACT_APP_WEB_URL + '/login'}>
             ログイン画面はこちら
-          </button>
+          </CommonLink>
         </div>
       </article>
     </div>

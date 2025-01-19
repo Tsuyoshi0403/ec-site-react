@@ -2,6 +2,8 @@ import { css } from '@emotion/css'
 import AuthenticationSuccessSvg from '../../../Cores/Svgs/Icons/AuthenticationSuccessSvg'
 import AuthenticationFailedSvg from '../../../Cores/Svgs/Icons/AuthenticationFailedSvg'
 import { successType } from '../../Containers/AccountVerifyPage'
+import CommonLink from '../../../Cores/Components/Atoms/CommonLink'
+import CommonH2 from '../../../Cores/Components/Atoms/CommonH2'
 
 const rootStyle = css`
   display: flex;
@@ -15,7 +17,6 @@ const rootStyle = css`
     margin-bottom: 50px;
     .account-verify-title {
       font-size: 35px;
-      color: #62cda2;
     }
   }
   .account-verify-card {
@@ -34,18 +35,6 @@ const rootStyle = css`
     .login-btn-link-area {
       margin: 50px 0;
       text-align: center;
-      .login-btn-link {
-        color: #469fd6;
-        font-size: 12px;
-        font-weight: 700;
-        background: transparent;
-        border: 0;
-        &:hover {
-          color: #5ab3e1;
-          text-decoration: underline;
-          cursor: pointer;
-        }
-      }
     }
   }
 `
@@ -63,9 +52,10 @@ const AccountVerifyPage = ({ successType }: IProps): JSX.Element => {
   return (
     <div className={rootStyle}>
       <div className="account-verify-title-area">
-        <div className="account-verify-title">
-          {successType === 'success' ? '認証完了' : '認証エラー'}
-        </div>
+        <CommonH2
+          className="account-verify-title"
+          label={successType === 'success' ? '認証完了' : '認証エラー'}
+        />
       </div>
       <article className="account-verify-card">
         {successType === 'success' && (
@@ -77,15 +67,9 @@ const AccountVerifyPage = ({ successType }: IProps): JSX.Element => {
             <hr />
             <p className="account-verify-txt">早速ログインしてみましょう</p>
             <div className="login-btn-link-area">
-              <button
-                className="login-btn-link"
-                type="button"
-                onClick={() =>
-                  (location.href = process.env.REACT_APP_WEB_URL + '/login')
-                }
-              >
+              <CommonLink href={process.env.REACT_APP_WEB_URL + '/login'}>
                 ログイン画面はこちら
-              </button>
+              </CommonLink>
             </div>
           </section>
         )}
@@ -99,15 +83,9 @@ const AccountVerifyPage = ({ successType }: IProps): JSX.Element => {
             </p>
             <hr />
             <div className="login-btn-link-area">
-              <button
-                className="login-btn-link"
-                type="button"
-                onClick={() =>
-                  (location.href = process.env.REACT_APP_WEB_URL + '/login')
-                }
-              >
+              <CommonLink href={process.env.REACT_APP_WEB_URL + '/login'}>
                 ログイン画面はこちら
-              </button>
+              </CommonLink>
             </div>
           </section>
         )}
