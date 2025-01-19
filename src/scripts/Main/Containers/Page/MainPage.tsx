@@ -8,8 +8,9 @@ import { useNavigate } from 'react-router-dom'
 
 /**
  * メイン画面コンテナ
+ * @returns {JSX.Element}
  */
-const MainPageContainers = () => {
+const MainPageContainers = (): JSX.Element => {
   const navigate = useNavigate()
   const { execApi: execRankingApiGet } = useApiLoading(RakutenApiRanking.get)
   const [items, setItems] = useState<IRankingResponse['Items']>([])

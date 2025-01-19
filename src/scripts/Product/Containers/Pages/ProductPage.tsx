@@ -8,8 +8,9 @@ import useApiLoading from '../../../Cores/Hooks/useApiLoading'
 
 /**
  * 商品画面コンテナ
+ * @returns {JSX.Element}
  */
-const ProductPageContainers = () => {
+const ProductPageContainers = (): JSX.Element => {
   const [searchParams] = useSearchParams()
   const itemCode = searchParams.get('itemCode')
   const { execApi: execItemSearchApiGet } = useApiLoading(
