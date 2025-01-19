@@ -1,7 +1,7 @@
 import { css } from '@emotion/css'
 import { ChangeEvent } from 'react'
 import { IFormState } from '../../Containers/Pages/LoginPage'
-import LoginForm from '../Molecules/LoginForm'
+import LoginForm from '../Organisms/LoginForm'
 import CommonLink from '../../../Cores/Components/Atoms/CommonLink'
 import CommonH2 from '../../../Cores/Components/Atoms/CommonH2'
 

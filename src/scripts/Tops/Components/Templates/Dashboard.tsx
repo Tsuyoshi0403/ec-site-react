@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import MainPageContainers from '../../../Main/Containers/Page/MainPage'
-import NewHeader from '../Organisms/NewHeader'
+import Header from './Header'
 import ProductPageContainers from '../../../Product/Containers/Pages/ProductPage'
 import { css } from '@emotion/css'
 import SearchProductPageContainers from '../../../SearchProduct/Containers/Pages/SearchProductPage'
@@ -23,7 +23,7 @@ export default function Dashboard(): JSX.Element {
   return (
     <div className={mainStyle}>
       {/** ヘッダー */}
-      <NewHeader />
+      <Header />
       {/** メイン領域 */}
       <div className="main-content">
         <Routes>
