@@ -1,6 +1,6 @@
 import { css } from '@emotion/css'
 import { ChangeEvent } from 'react'
-import { IFormState } from '../../Containers/Pages/NewLoginPage'
+import { IFormState } from '../../Containers/Pages/LoginPage'
 import LoginForm from '../Molecules/LoginForm'
 import CommonLink from '../../../Cores/Components/Atoms/CommonLink'
 import CommonH2 from '../../../Cores/Components/Atoms/CommonH2'
@@ -49,7 +49,7 @@ type IProps = {
  * ログイン画面
  * @returns {JSX.Element}
  */
-const NewLoginPage = (props: IProps): JSX.Element => {
+const LoginPage = (props: IProps): JSX.Element => {
   return (
     <div className={rootStyle}>
       <article className="login-card">
@@ -75,4 +75,4 @@ const NewLoginPage = (props: IProps): JSX.Element => {
   )
 }
 
-export default NewLoginPage
+export default LoginPage

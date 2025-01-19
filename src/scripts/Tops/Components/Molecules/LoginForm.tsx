@@ -1,6 +1,6 @@
 import { css } from '@emotion/css'
 import { ChangeEvent, useState } from 'react'
-import { IFormState } from '../../Containers/Pages/NewLoginPage'
+import { IFormState } from '../../Containers/Pages/LoginPage'
 import CommonBtn from '../../../Cores/Components/Atoms/CommonBtn'
 import CommonInput from '../../../Cores/Components/Atoms/CommonInput '
 import CommonLabel from '../../../Cores/Components/Atoms/CommonLabel'
