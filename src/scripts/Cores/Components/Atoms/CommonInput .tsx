@@ -45,14 +45,14 @@ const CommonInput = (props: ICommonInputProps): JSX.Element => {
   const { ...otherProps } = props
 
   return (
-    <p className={rootStyle}>
+    <div className={rootStyle}>
       <input
         className={classNames('login-input-text', {
           'input-error': props.error,
         })}
         {...otherProps}
       />
-    </p>
+    </div>
   )
 }
 
