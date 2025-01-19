@@ -1,4 +1,3 @@
-import CoffeeMachine from '../../../assets/images/CoffeeMachine.jpg'
 import { css } from '@emotion/css'
 import StarRating from '../Molecules/StarRating'
 import { ChangeEvent, useState } from 'react'

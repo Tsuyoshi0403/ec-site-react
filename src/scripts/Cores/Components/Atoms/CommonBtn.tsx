@@ -1,35 +1,69 @@
 import { css } from '@emotion/css'
 import classNames from 'classnames'
 
-const smallStyle = css({
-  color: 'red',
-  fontSize: '16px',
-})
+const smallStyle = css`
+  border-radius: 5px;
+  height: 60px;
+  width: 360px;
+  font-weight: 700;
+  font-size: 16px;
+  background-color: #62cda2;
+  color: #fff;
+  border: 0;
+  cursor: pointer;
+  &:disabled {
+    background-color: #dee5ec;
+    cursor: not-allowed;
+  }
+`
 
-const mediumStyle = css({
-  color: 'red',
-  fontSize: '32px',
-})
+const mediumStyle = css`
+  border-radius: 5px;
+  height: 60px;
+  width: 380px;
+  font-weight: 700;
+  font-size: 16px;
+  background-color: #62cda2;
+  color: #fff;
+  border: 0;
+  cursor: pointer;
+  &:disabled {
+    background-color: #dee5ec;
+    cursor: not-allowed;
+  }
+`
 
-const largeStyle = css({
-  display: 'inline-flex',
-  flexShrink: 0,
-  minWidth: '120px',
-  height: '48px',
-  fontSize: '16px',
-  fontWeight: 600,
-  borderRadius: '10px',
-  lineHeight: '16px',
-  padding: '0 20px',
-  justifyContent: 'center',
-  alignItems: 'center',
-  boxShadow: 'none',
-})
+const largeStyle = css`
+  border-radius: 5px;
+  height: 60px;
+  width: 400px;
+  font-weight: 700;
+  font-size: 16px;
+  background-color: #62cda2;
+  color: #fff;
+  border: 0;
+  cursor: pointer;
+  &:disabled {
+    background-color: #dee5ec;
+    cursor: not-allowed;
+  }
+`
 
-const megaStyle = css({
-  color: 'red',
-  fontSize: '54px',
-})
+const megaStyle = css`
+  border-radius: 5px;
+  height: 60px;
+  width: 420px;
+  font-weight: 700;
+  font-size: 16px;
+  background-color: #62cda2;
+  color: #fff;
+  border: 0;
+  cursor: pointer;
+  &:disabled {
+    background-color: #dee5ec;
+    cursor: not-allowed;
+  }
+`
 
 type ICommonBtnProps = React.DetailedHTMLProps<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -40,7 +74,8 @@ type ICommonBtnProps = React.DetailedHTMLProps<
 }
 
 /**
- * 共通ボタン
+ * 共通buttonタグ
+ * @param props
  */
 const CommonBtn = (props: ICommonBtnProps): JSX.Element => {
   let sizeStyle = smallStyle
@@ -53,11 +88,9 @@ const CommonBtn = (props: ICommonBtnProps): JSX.Element => {
   }
 
   return (
-    <div>
-      <button {...props} className={classNames(props.className, sizeStyle)}>
-        {props.children}
-      </button>
-    </div>
+    <button {...props} className={classNames(props.className, sizeStyle)}>
+      {props.children}
+    </button>
   )
 }
 

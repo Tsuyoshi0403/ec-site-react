@@ -1,5 +1,5 @@
 import { Backdrop } from '@material-ui/core'
-import LoadingMark from '../Atoms/LoadingMark'
+import LoadingMark from '../Molecules/LoadingMark'
 import { css } from '@emotion/css'
 
 const loadStyle = css`

@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 import ApiLogin from '../../../Cores/Api/ApiLogin'
 import useApiLoading from '../../../Cores/Hooks/useApiLoading'
-import NewLoginPage from '../../Components/Pages/NewLoginPage'
+import LoginPage from '../../Components/Pages/LoginPage'
 import StringUtil from '../../../Cores/Utils/StringUtil'
 import { useNavigate } from 'react-router-dom'
 import StorageUtil, { StorageKey } from '../../../Cores/Utils/StorageUtil'
@@ -19,8 +19,9 @@ export type IFormState = {
 
 /**
  * ログイン画面コンテナ
+ * @returns {JSX.Element}
  */
-const NewLoginPageContainers = () => {
+const LoginPageContainers = (): JSX.Element => {
   const { execApi: execApiPost } = useApiLoading(ApiLogin.post)
   const navigate = useNavigate()
   const [formState, setFormState] = useState<IFormState>({
@@ -84,7 +85,7 @@ const NewLoginPageContainers = () => {
   }
 
   return (
-    <NewLoginPage
+    <LoginPage
       loginId={formState.loginId}
       password={formState.password}
       loginIdError={formState.loginIdError}
@@ -96,4 +97,4 @@ const NewLoginPageContainers = () => {
   )
 }
 
-export default NewLoginPageContainers
+export default LoginPageContainers

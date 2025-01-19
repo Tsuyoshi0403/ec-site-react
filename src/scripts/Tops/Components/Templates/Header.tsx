@@ -85,7 +85,7 @@ const rootStyle = css`
  * ヘッダーコンポーネント
  * @returns {JSX.Element}
  */
-const NewHeader = (): JSX.Element => {
+const Header = (): JSX.Element => {
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -133,6 +133,7 @@ const NewHeader = (): JSX.Element => {
             value={keyword}
             onChange={onSearchChange}
             placeholder="キーワードで検索"
+            autoComplete="off"
           />
           <button className="search-btn">
             <SearchIcon sx={{ color: 'white' }} />
@@ -175,4 +176,4 @@ const NewHeader = (): JSX.Element => {
   )
 }
 
-export default NewHeader
+export default Header
