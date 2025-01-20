@@ -42,13 +42,13 @@ type ICommonInputProps = React.DetailedHTMLProps<
  * @param props
  */
 const CommonInput = (props: ICommonInputProps): JSX.Element => {
-  const { ...otherProps } = props
+  const { error, ...otherProps } = props
 
   return (
     <div className={rootStyle}>
       <input
         className={classNames('login-input-text', {
-          'input-error': props.error,
+          'input-error': error,
         })}
         {...otherProps}
       />
