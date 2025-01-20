@@ -25,14 +25,14 @@ type ICommonLabelProps = React.DetailedHTMLProps<
  * @param props
  */
 const CommonLabel = (props: ICommonLabelProps): JSX.Element => {
-  const { className = '', children, ...otherProps } = props
+  const { className = '', children, error, ...otherProps } = props
 
   return (
     <label
       className={classNames(
         rootStyle,
         {
-          'label-error': props.error,
+          'label-error': error,
         },
         className
       )}
