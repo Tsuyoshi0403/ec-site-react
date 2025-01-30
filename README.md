@@ -30,6 +30,12 @@
 |<img width="100%" alt="verifyFailed" src="https://github.com/user-attachments/assets/50ae47da-18f7-497b-b04e-c60cbc7bad69">|<img width="100%" alt="verifySuccess" src="https://github.com/user-attachments/assets/e671b4cb-8659-4bee-9e9b-2ffc11518c23">|
 |・認証用メールURLを押下して失敗した場合、認証エラーを通知します。| ・認証用メールURLを押下して成功した場合、認証完了を通知します。 |
 
+## デザイン
+[Figma](https://www.figma.com/design/ZwtF5wiwZwEI3mcFHccHfN/EC%E3%82%B5%E3%82%A4%E3%83%88?node-id=0-1&t=70pWsUUjmJoqtIG6-1)
+
+## ディレクトリ構成
+- Atomic Design
+
 ## 技術スタック
 ### フロントエンド
 - React 18.2.0
