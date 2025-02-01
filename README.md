@@ -9,7 +9,11 @@
 将来的にはフルスタックエンジニアとして活躍することを目指しているため、フロントエンドとバックエンドで開発してみました。
 現在はまだ開発途中ですが、これから機能を順次追加する予定です。
 
+## デモ動画
+![Image](https://github.com/user-attachments/assets/5d549317-decc-4255-88fb-82620c2e5b89)
+
 ## 機能・画面一覧
+
 | ログイン画面 | メイン画面 |
 | --- | --- |
 |<img width="100%" alt="login" src="https://github.com/user-attachments/assets/22244dad-1dd7-4aff-9c2e-cd37f9c06f57">|<img width="100%" alt="top" src="https://github.com/user-attachments/assets/d5c7231a-8fdb-47f0-ae63-8977ed73f3ff">|
@@ -85,4 +89,5 @@ UI 全般
 - PHP-CS-Fixer
 - PHP Intelephense
 - barryvdh/laravel-ide-helper 3.2
+
 
